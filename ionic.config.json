@@ -1,0 +1,7 @@
+{
+  "name": "TransfertdArgent_MobileIonic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
