@@ -1,0 +1,57 @@
+ion-content {
+  //Right
+  //--overflow: hidden;
+  overflow: auto;
+  //scrollbar-width: thin;
+
+}
+// ------------------------------------------- Header -------------------------------------------//
+#header{
+  margin: 0 auto;
+  position: fixed;
+  background-color: rgb(255 255 255);
+  padding:0;
+  width: 100%;
+}
+#avatar{
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
+}
+
+// ----------------------------------------------- ion card --------------------------------------//
+.solde{
+  font-size: 0.8em;
+}
+.price-ensemble{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .price{
+    display: flex;
+    flex-direction: row;
+    .price-pr{
+      font-size: 1em;
+      color: rgb(0, 225, 255);
+    }
+    .price-fr{
+      font-size: 0.4em;
+      padding: 15px 12px;
+    }
+  }
+  .eye{
+    padding: 9px 0;
+  }
+}
+.date{
+  font-size: 0.6em;
+  // color: black;
+}
+
+@media screen and (min-width: 730px) {
+  ion-content {
+    overflow: auto;
+    //scrollbar-width: thin;
+
+  }
+}

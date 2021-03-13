@@ -1,0 +1,30 @@
+
+ion-card-content{
+  //padding: 25px 70px;
+  padding-bottom: 0;
+}
+.aboveCalculator{
+  border-bottom: rgb(133, 191, 224) solid 4px;
+  font-size: 1.1em;
+}
+
+//  ******************************####*****************************//
+
+#error{
+  text-align: center;
+  display: flex;
+  font-size: 1em;
+}
+
+@media screen and (min-width: 300px){
+  .aboveCalculator{
+    border-bottom: none;
+    font-size: 1.3em;
+  }
+  #error{
+    font-size: 1.3em;
+  }
+}
+
+//------------------------------------------------ ## ----------------------------------------------//
+

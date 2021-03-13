@@ -1,0 +1,123 @@
+<ion-header translucent={true}>
+    <ion-toolbar>
+        <ion-card class="ion-justify-content-center header">
+            <ion-card-header>
+                <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size-lg="1" size-md="1" size-sm="3" size="5">
+                            <div>
+                                <img src="assets/icon/logo.png"/>
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-header>
+            <ion-card-content class="ion-align-items-center">
+                <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                        <ion-col size="5" size-sm="3" offset-sm="1" offset-md="2">
+                            <div class="aboveDepot">
+                                <ion-icon id="depotIcon" src="assets/icon/depot.svg" alt="depot" ></ion-icon>Dépôt
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+        </ion-card>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-col id="choice" size="12">
+              <ion-segment (ionChange)="segmentChanged($event)">
+                  <ion-segment-button value="emetteur">
+                      <ion-label>Emetteur</ion-label>
+                  </ion-segment-button>
+                  <ion-segment-button value="bénéficiaire">
+                       <ion-label>Bénéficiaire</ion-label>
+                  </ion-segment-button>
+              </ion-segment>
+        </ion-col>
+    </ion-toolbar>
+</ion-header>
+
+  <ion-col class="wrapper" *ngIf="activeEmetteur">
+      <div class="scrollbar style-3" >
+          <div class="force-overflow">
+              <!-- form -->
+              <form [formGroup]="emetteurForm">
+                  <ion-item lines="full" class=" ion-margin-bottom">
+                      <ion-label position="floating">N° CNI</ion-label>
+                      <ion-input type="number" required formControlName="identityNumberEmetteur"></ion-input>
+                  </ion-item>
+<!--                          <ion-label color="danger" class="ion-justify-content-center error">le montant ne peut pas être négatif!</ion-label>-->
+                  <ion-item lines="full" class="ion-margin-bottom">
+                      <ion-label position="floating">Nom</ion-label>
+                      <ion-input type="text" required formControlName="nom"></ion-input>
+                  </ion-item>
+<!--                          <ion-label color="danger" class="ion-justify-content-center error">Lorem ipsum dolor sit temporibus voluptate?</ion-label>-->
+                  <ion-item lines="full" class=" ion-margin-bottom">
+                      <ion-label position="floating">Prénom</ion-label>
+                      <ion-input type="text" required formControlName="prenom"></ion-input>
+                  </ion-item>
+<!--                          <ion-label color="danger" class="ion-justify-content-center error">error prénom</ion-label>-->
+                  <ion-item lines="full" class="ion-margin-bottom">
+                        <ion-label position="floating">Téléphone</ion-label>
+                        <ion-input type="number" required formControlName="phoneEmetteur"></ion-input>
+                  </ion-item>
+<!--                          <ion-label color="danger" class="ion-justify-content-center error">Lorem ipsum dolor sit amet.</ion-label>-->
+                  <ion-item lines="full" class="ion-margin-bottom">
+                      <ion-label position="floating">Montant</ion-label>
+                      <ion-input type="number" required formControlName="montant"></ion-input>
+                  </ion-item>
+                  <!--    <ion-label color="danger" class="ion-justify-content-center error">Lorem ipsum dolor sit amet.</ion-label>-->
+                  <ion-item  lines="full" class="ion-margin-bottom fraisItem">
+                      <ion-label position="floating">Frais</ion-label>
+                      <ion-input class="fraisInput" type="number" required></ion-input>
+                  </ion-item>
+                  <!-- <ion-label color="danger" class="ion-justify-content-center error">Lorem ipsum dolor sit amet.</ion-label>-->
+                  <ion-item lines="full" class="ion-margin-bottom">
+                      <ion-label position="floating">Total</ion-label>
+                      <ion-input type="number" required></ion-input>
+                  </ion-item>
+<!--                          <ion-label color="danger" class="ion-justify-content-center error">Lorem ipsum dolor sit amet.</ion-label>-->
+                  <ion-row class="ion-justify-content-end ion-margin-top">
+                      <ion-col >
+                         <ion-button expand="block" class="ion-justify-content-end ion-margin-top" color="tertiary" shape="round" (click)="Suivant()">Suivant</ion-button>
+                      </ion-col>
+                  </ion-row>
+
+              </form>
+          </div>
+      </div>
+  </ion-col>
+
+
+  <ion-col class="wrapper" *ngIf="activeBenefice">
+      <div class="scrollbar style-3">
+          <div class="force-overflow">
+              <!-- form -->
+              <form>
+                  <ion-item lines="full" class="ion-margin-bottom">
+                    <ion-label position="floating">Nom</ion-label>
+                    <ion-input type="text" required></ion-input>
+                  </ion-item>
+                  <!--                          <ion-label color="danger" class="ion-justify-content-center error">Lorem ipsum dolor sit temporibus voluptate?</ion-label>-->
+                  <ion-item lines="full" class=" ion-margin-bottom">
+                    <ion-label position="floating">Prénom</ion-label>
+                    <ion-input type="text" required></ion-input>
+                  </ion-item>
+                  <!--                          <ion-label color="danger" class="ion-justify-content-center error">error prénom</ion-label>-->
+                  <ion-item lines="full" class="ion-margin-bottom">
+                    <ion-label position="floating">Téléphone</ion-label>
+                    <ion-input type="number" required></ion-input>
+                  </ion-item>
+                  <!--                          <ion-label color="danger" class="ion-justify-content-center error">Lorem ipsum dolor sit amet.</ion-label>-->
+                  <ion-row class="ion-justify-content-end ion-margin-top">
+                    <ion-col >
+                      <ion-button expand="block" class="ion-justify-content-end ion-margin-top" color="tertiary" shape="round" (click)="Terminer()">Terminer</ion-button>
+                    </ion-col>
+                  </ion-row>
+              </form>
+          </div>
+      </div>
+  </ion-col>
+

@@ -1,0 +1,40 @@
+<ion-content>
+    <ion-grid>
+
+        <ion-row>
+            <ion-col size="12" size-sm >
+                 <ion-card>
+                    <ion-card-content>
+                        <div class="ion-text-center">
+                           <img class="ion-text-center" src="assets/icon/logo.png" alt="logo" >
+                        </div>
+                         <ion-col class="ion-text-center" offset="3" id="cont" size="6" >
+                              <span class="">Login</span>
+                         </ion-col>
+                    </ion-card-content>
+                 </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row >
+            <ion-col>
+                <form id="form" [formGroup]="registrationForm" >
+                    <ion-label *ngIf="errorData">Username ou mot de passe incorrects!</ion-label>
+                    <ion-item class="ion-margin-bottom">
+                        <ion-input type="text" formControlName="username" placeholder="username"></ion-input>
+                    </ion-item>
+                    <ion-label *ngIf="username.hasError('required') && username.touched ">Vous devez fournir un username!</ion-label>
+                    <ion-item class="ion-margin-bottom">
+                        <ion-input type="text" formControlName="password" placeholder="mot de passe"></ion-input>
+                    </ion-item>
+                    <ion-label *ngIf="password.hasError('required') && password.touched">Vous devez fournir un mot de passe!</ion-label>
+                     <br> <br>
+                    <ion-label color="primary" class="ion-float-right"><a href="">mot de  passe oublié?</a> </ion-label>
+                    <ion-button expand="block" [disabled]="registrationForm.invalid" color="secondary" shape="round" (click)="connect()">Se connecter</ion-button>
+                </form>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
+</ion-content>
+

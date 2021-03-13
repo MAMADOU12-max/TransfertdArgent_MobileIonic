@@ -1,0 +1,79 @@
+ion-content {
+  --overflow: hidden;
+   overflow: auto;
+}
+
+ion-card{
+  border-radius: 23px;
+  margin-bottom: 67px;
+
+}
+ion-card-content{
+  padding-bottom: 0;
+}
+#cont{
+  width: 61px;
+  display: flex;
+  justify-content: center;
+  font-size: 1.2em;
+}
+span{
+  font-weight: bold;
+  //padding: 30px 0 20px  42px;
+  border-bottom: rgb(0, 217, 255) solid 4px;
+  display: block;
+
+}
+
+//***************************************************####**********************************************//
+
+
+#form {
+  margin-top: -40px;
+  padding-left: 30px;
+  padding-right: 30px;
+
+  ion-button {
+    margin-top: 35px;
+    height: 48px;
+    font-size: 18px;
+    text-transform: initial;
+    border-radius: 50px;
+    box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.05);
+    --box-shadow: none;
+  }
+
+  ion-label{
+     a{
+       font-size: 15px;
+       text-decoration: none;
+     }
+  }
+}
+
+ion-item {
+  border-radius: 50px;
+  height: 55px;
+  box-shadow: 1px 8px 8px 0px rgba(0, 0, 0, 0.08);
+  --highlight-height: 0px;
+  margin-top: 2px;
+
+  ion-input {
+    font-size: 18px;
+    --padding-top: 20px;
+    --padding-bottom: 15px;
+    --padding-start: 5px;
+  }
+
+  a {
+    font-size: 17px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+  }
+}
+ion-label{
+   color: darkred;
+  text-align: center;
+  display: flex;
+  font-size: .8em;
+}
