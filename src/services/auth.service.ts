@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
 import {JwtHelperService} from '@auth0/angular-jwt';
 // @ts-ignore
 import * as jwt_decode from 'jwt-decode';
-import {LoadingController, NavController} from '@ionic/angular';
+import { NavController} from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -18,40 +18,30 @@ export class AuthService {
   private urlEnv = environment.Url_base;
   helper = new JwtHelperService() ;
 
-  constructor(private httpClient: HttpClient, private router: Router, public loadingController: LoadingController) { }
-
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'Please wait...',
-      duration: 2000
-    });
-    await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
-  }
-
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   // tslint:disable-next-line:typedef
   Authentification(username: string, password: string) {
-    return  this.httpClient.post(this.urlEnv + '/login', {
-      username, password
-    }).pipe(
-      map((response: any) => {
-        const tokenDecoded = this.helper.decodeToken(response.token) ;
-        // console.log(this.tokenDecoded.roles[0]) ;
-        localStorage.setItem('token', response.token) ;
-        this.roleuser = tokenDecoded.roles ;
-        console.log(this.roleuser[0]);
-        // this.logginIn = true;
-        if (this.roleuser[0] === 'ROLE_CAISSIER') {
-          this.presentLoading().then( () => {
-             this.router.navigateByUrl('/tabs');
-          });
-        }
-      })
-    ) ;
+   // this.presentLoading().then( () => {
+        return  this.httpClient.post(this.urlEnv + '/login', {
+          username, password
+        }).pipe(
+            map((response: any) => {
+                const tokenDecoded = this.helper.decodeToken(response.token) ;
+                // console.log(this.tokenDecoded.roles[0]) ;
+                localStorage.setItem('token', response.token) ;
+                this.roleuser = tokenDecoded.roles ;
+                console.log(this.roleuser[0]);
+                // this.logginIn = true;
+                if (this.roleuser[0] === 'ROLE_CAISSIER') {
+                     this.router.navigateByUrl('/tabs');
+                }
+                if (this.roleuser[0] === 'ROLE_ADMINSYSTEM') {
+                    this.router.navigateByUrl('/tabs');
+                }
+            })
+        ) ;
+    // });
   }
 
   // tslint:disable-next-line:typedef
@@ -63,4 +53,11 @@ export class AuthService {
     return null ;
   }
 
+  // tslint:disable-next-line:typedef
+  logout() {
+    const token = localStorage.getItem('token') ;
+    // this.logginIn = false;
+    return  localStorage.clear();
+   // return token;
+  }
 }
