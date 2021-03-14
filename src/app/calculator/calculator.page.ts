@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
 import {FraisService} from '../../services/frais.service';
+import {logger} from 'codelyzer/util/logger';
 
 @Component({
   selector: 'app-calculator',
@@ -47,6 +48,7 @@ export class CalculatorPage implements OnInit {
     }
 
    async Calculer(){
+
         if (this.frais.value.montant < 0) {
             this.errorNum = true;
             console.log('not valid');
