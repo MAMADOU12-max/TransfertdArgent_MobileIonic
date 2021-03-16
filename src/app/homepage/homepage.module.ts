@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
-import { HomePageRoutingModule } from './home-routing.module';
-import { HomePage } from './home.page';
+
+import { HomepagePageRoutingModule } from './homepage-routing.module';
+
+import { HomepagePage } from './homepage.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomepagePageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [HomepagePage]
 })
-export class HomePageModule {}
+export class HomepagePageModule {}

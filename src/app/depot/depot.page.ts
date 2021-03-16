@@ -81,11 +81,11 @@ export class DepotPage implements OnInit {
         this.activeEmetteur = false;
     }
 
-    async GoodTransaction() {
+    async GoodTransaction(messageTransaction: any) {
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: 'Reussie',
-        message: 'Le dépôt s\'est bien effectué. Merci',
+        message: messageTransaction,
         buttons: ['OK']
       });
 
@@ -93,8 +93,6 @@ export class DepotPage implements OnInit {
     }
 
   async Terminer() {
-        // this.nomCompletEmetteur = this.depotForm.value.prenom + ' ' + this.depotForm.value.nom;
-        // console.log(this.nomCompletEmetteur);
        console.log(this.depotForm.value);
        const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
@@ -118,10 +116,11 @@ export class DepotPage implements OnInit {
             handler: () => {
 
               this.transactionService.depot(this.depotForm.value).subscribe(data => {
-                  this.GoodTransaction();
-                  this.router.navigate(['/home']);
-                }, error => {
-                console.log('ERROR!!!!');
+                  this.GoodTransaction(data);
+                  this.router.navigate(['/homepage']);
+                  this.depotForm.reset();
+              }, error => {
+                console.log(error);
               });
             }
           }

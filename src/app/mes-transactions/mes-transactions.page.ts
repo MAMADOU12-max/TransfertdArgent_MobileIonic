@@ -10,6 +10,7 @@ export class MesTransactionsPage implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('mes transactions');
   }
 
 }

@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
    password: AbstractControl;
    errorData = false;
    submitted = false;
+   connected = false;
 
    constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService,
                private navController: NavController, public loadingController: LoadingController) { }
@@ -30,15 +31,16 @@ export class LoginPage implements OnInit {
     }
 
   async presentLoading() {
+    // console.log(this.connected);
     const loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message: 'Please wait...',
-      duration: 400
+      message: 'chargement...',
+      duration: 10
     });
     await loading.present();
 
     const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
+   // console.log('Loading dismissed!');
   }
 
     connect() {
@@ -47,9 +49,10 @@ export class LoginPage implements OnInit {
         //   console.log('errors username');
         // }
         this.presentLoading().then( () => {
-          // tslint:disable-next-line:max-line-length
-            this.authService.Authentification(this.registrationForm.value.username, this.registrationForm.value.password).subscribe(data => {
-                  // console.log(data);
+         // tslint:disable-next-line:max-line-length
+        this.authService.Authentification(this.registrationForm.value.username, this.registrationForm.value.password).subscribe(data => {
+                  this.connected = true;
+                 // console.log(this.connected);
              }, error => {
               this.errorData = true;
               return;

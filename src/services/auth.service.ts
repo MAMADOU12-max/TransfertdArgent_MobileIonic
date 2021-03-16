@@ -31,14 +31,14 @@ export class AuthService {
                 // console.log(this.tokenDecoded.roles[0]) ;
                 localStorage.setItem('token', response.token) ;
                 this.roleuser = tokenDecoded.roles ;
-                console.log(this.roleuser[0]);
+               // console.log(this.roleuser[0]);
                 // this.logginIn = true;
                 if (this.roleuser[0] === 'ROLE_CAISSIER') {
-                    this.router.navigateByUrl('/tabs');
+                    this.router.navigateByUrl('/homepage');
                 } else if (this.roleuser[0] === 'ROLE_ADMINSYSTEM') {
-                    this.router.navigateByUrl('/tabs');
+                    this.router.navigateByUrl('/homepage');
                 } else if (this.roleuser[0] === 'ROLE_USERAGENCE') {
-                    this.router.navigateByUrl('/tabs');
+                    this.router.navigateByUrl('/homepage');
                 }
             })
         ) ;

@@ -4,18 +4,18 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RetraitPageRoutingModule } from './retrait-routing.module';
+import { DepotComptePageRoutingModule } from './depot-compte-routing.module';
 
-import { RetraitPage } from './retrait.page';
+import { DepotComptePage } from './depot-compte.page';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        RetraitPageRoutingModule,
+        DepotComptePageRoutingModule,
         ReactiveFormsModule
     ],
-  declarations: [RetraitPage]
+  declarations: [DepotComptePage]
 })
-export class RetraitPageModule {}
+export class DepotComptePageModule {}

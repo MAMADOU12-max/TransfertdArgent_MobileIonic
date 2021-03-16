@@ -73,6 +73,18 @@ const routes: Routes = [
   {
     path: 'mes-commissions',
     loadChildren: () => import('./mes-commissions/mes-commissions.module').then( m => m.MesCommissionsPageModule)
+  },
+  {
+    path: 'touteslestransactions',
+    loadChildren: () => import('./touteslestransactions/touteslestransactions.module').then( m => m.TouteslestransactionsPageModule)
+  },
+  {
+    path: 'depot-compte',
+    loadChildren: () => import('./depot-compte/depot-compte.module').then( m => m.DepotComptePageModule)
+  },
+  {
+    path: 'homepage',
+    loadChildren: () => import('./homepage/homepage.module').then( m => m.HomepagePageModule)
   }
 ];
 @NgModule({

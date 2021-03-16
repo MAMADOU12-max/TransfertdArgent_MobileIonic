@@ -9,14 +9,14 @@ const routes: Routes = [
     // pathMatch: 'full',
     component: TabsPage,
     children: [
-      {
-        path: '',
-        loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
-      },
-      {
-        path: 'home',
-        loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
-      },
+      // {
+      //   path: '',
+      //   loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
+      // },
+      // {
+      //   path: 'home',
+      //   loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
+      // },
       {
         path: 'historique',
         loadChildren: () => import('../historique/historique.module').then(m => m.HistoriquePageModule)
@@ -52,12 +52,20 @@ const routes: Routes = [
       {
         path: 'mes-commissions',
         loadChildren: () => import('../mes-commissions/mes-commissions.module').then( m => m.MesCommissionsPageModule)
+      },
+      {
+        path: 'touteslestransactions',
+        loadChildren: () => import('../touteslestransactions/touteslestransactions.module').then( m => m.TouteslestransactionsPageModule)
+      },
+      {
+        path: 'depot-compte',
+        loadChildren: () => import('../depot-compte/depot-compte.module').then( m => m.DepotComptePageModule)
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '',
     pathMatch: 'full'
   }
 ];

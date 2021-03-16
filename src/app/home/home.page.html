@@ -32,7 +32,7 @@
                      <ion-card-title class="price-ensemble">
 
                        <ion-card-title class="price">
-                         <ion-card-title class="price-pr">{{solde}}</ion-card-title>
+                         <ion-card-title class="price-pr">{{compte?.solde}}</ion-card-title>
                          <ion-card-title class="price-fr">FCFA</ion-card-title>
                        </ion-card-title>
 
@@ -41,7 +41,7 @@
                        </ion-card-title>
 
                      </ion-card-title>
-                     <ion-card-subtitle class="date">Mise à jour le {{miseajour}}</ion-card-subtitle>
+                     <ion-card-subtitle class="date">Mise à jour le {{compte?.miseajour}}</ion-card-subtitle>
                    </ion-card-header>
                  </ion-card>
                </ion-col>
@@ -51,43 +51,71 @@
                <ion-col size="11">
 
                    <ion-list class="home-list">
-                     <ion-item routerLink="/tabs/depot" class="">
-                       <ion-icon slot="start"  src="assets/icon/depot.svg" class="component-icon component-icon-primary"></ion-icon>
-                       <ion-label>Depot</ion-label>
-                     </ion-item>
+                       <ion-item routerLink="/tabs/depot" *ngIf="useragence">
+                           <ion-icon slot="start"  src="assets/icon/depot.svg" class="component-icon component-icon-primary"></ion-icon>
+                           <ion-label>Depot</ion-label>
+                       </ion-item>
 
-                     <ion-item routerLink="/tabs/retrait" class="">
-                       <ion-icon slot="start"  src="assets/icon/retrait.svg" class="component-icon component-icon-primary"></ion-icon>
-                       <ion-label>Retrait</ion-label>
-                     </ion-item>
+                       <ion-item routerLink="/tabs/retrait" *ngIf="useragence">
+                           <ion-icon slot="start"  src="assets/icon/retrait.svg" class="component-icon component-icon-primary"></ion-icon>
+                           <ion-label>Retrait</ion-label>
+                       </ion-item>
 
-                     <ion-item routerLink="/tabs/mes-transactions">
-                       <ion-icon slot="start"  src="assets/icon/transaction.svg" class="component-icon component-icon-primary"></ion-icon>
-                       <ion-label>Mes transactions</ion-label>
-                     </ion-item>
+                       <ion-item routerLink="/tabs/depot-compte" *ngIf="caissier">
+                           <ion-icon slot="start" name="cube-outline"></ion-icon>
+                           <ion-label>Dépôt</ion-label>
+                       </ion-item>
 
-                     <ion-item routerLink="/tabs/toutesles-transactions">
-                       <ion-icon slot="start"  src="assets/icon/all-transaction.svg" class="component-icon component-icon-primary"></ion-icon>
-                       <ion-label>Toutes les transactions</ion-label>
-                     </ion-item>
+                       <ion-item routerLink="/tabs/mes-transactions">
+                           <ion-icon slot="start" src="assets/icon/transaction.svg" class="component-icon component-icon-primary"></ion-icon>
+                           <ion-label>Mes transactions</ion-label>
+                       </ion-item>
 
-                     <ion-item routerLink="/tabs/mes-commissions">
-                       <ion-icon slot="start"  src="assets/icon/commis.svg" class="component-icon component-icon-primary"></ion-icon>
-                       <ion-label>Mes commissions</ion-label>
-                     </ion-item>
+                       <ion-item routerLink="/tabs/toutesles-transactions">
+                           <ion-icon slot="start"  src="assets/icon/all-transaction.svg" class="component-icon component-icon-primary"></ion-icon>
+                           <ion-label>Toutes les transactions</ion-label>
+                       </ion-item>
 
-                     <ion-item routerLink="/tabs/calculator">
-                       <ion-icon slot="start"  src="assets/icon/calculator.svg" class="component-icon component-icon-primary"></ion-icon>
-                       <ion-label>Calculateur de frais</ion-label>
-                     </ion-item>
+                       <ion-item routerLink="/tabs/mes-commissions" *ngIf="adminSystem">
+                           <ion-icon slot="start"  src="assets/icon/commis.svg" class="component-icon component-icon-primary"></ion-icon>
+                           <ion-label>Mes commissions</ion-label>
+                       </ion-item>
 
-                     <ion-item (click)="disconnect()"  class="">
-                       <ion-icon slot="start"  src="assets/icon/exit.svg" class="component-icon component-icon-primary"></ion-icon>
-                       <ion-label>Deconnexion</ion-label>
-                     </ion-item>
-                   </ion-list>
+                       <ion-item routerLink="/tabs/calculator">
+                           <ion-icon slot="start"  src="assets/icon/calculator.svg" class="component-icon component-icon-primary"></ion-icon>
+                           <ion-label>Calculateur de frais</ion-label>
+                       </ion-item>
+
+                       <ion-item (click)="disconnect()"  class="">
+                           <ion-icon slot="start"  src="assets/icon/exit.svg" class="component-icon component-icon-primary"></ion-icon>
+                           <ion-label>Deconnexion</ion-label>
+                       </ion-item>
+                    </ion-list>
 
                </ion-col>
            </ion-row>
     </ion-grid>
+
+<!--  <ion-tabs>-->
+<!--    <ion-tab-bar slot="bottom">-->
+
+<!--      <ion-tab-button tab="home">-->
+<!--        <ion-icon src="assets/icon/home.svg"></ion-icon>-->
+<!--      </ion-tab-button>-->
+
+<!--      <ion-tab-button tab="historique">-->
+<!--        <ion-icon name="refresh"></ion-icon>-->
+<!--      </ion-tab-button>-->
+
+<!--      <ion-tab-button tab="tab3">-->
+<!--        <ion-icon name="barcode"></ion-icon>-->
+<!--      </ion-tab-button>-->
+
+<!--      <ion-tab-button tab="calculator">-->
+<!--        <ion-icon src="assets/icon/calculator.svg"></ion-icon>-->
+<!--      </ion-tab-button>-->
+
+<!--    </ion-tab-bar>-->
+<!--  </ion-tabs>-->
 </ion-content>
+<!--<app-tabs></app-tabs>-->
