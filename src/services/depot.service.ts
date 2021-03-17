@@ -10,7 +10,7 @@ export class DepotService {
   private urlEnv = environment.Url_base;
   constructor(private httpClient: HttpClient) { }
 
-  depot(montantDeDepot: number, utilisateur: number) {
-     return this.httpClient.post(this.urlEnv + '/depot', {montantDeDepot, utilisateur} );
+  depot(montantDeDepot: number) {
+     return this.httpClient.post(this.urlEnv + '/depot', montantDeDepot );
   }
 }

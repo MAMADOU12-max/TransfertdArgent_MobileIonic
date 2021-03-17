@@ -25,7 +25,7 @@
                     </ion-item>
                     <ion-label *ngIf="username.hasError('required') && username.touched ">Vous devez fournir un username!</ion-label>
                     <ion-item class="ion-margin-bottom">
-                        <ion-input type="text" formControlName="password" placeholder="mot de passe"></ion-input>
+                        <ion-input type="password" formControlName="password" placeholder="mot de passe"></ion-input>
                     </ion-item>
                     <ion-label *ngIf="password.hasError('required') && password.touched">Vous devez fournir un mot de passe!</ion-label>
                      <br> <br>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DepotService} from '../../services/depot.service';
 import {AuthService} from '../../services/auth.service';
-import {JwtHelperService} from '@auth0/angular-jwt';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {Router} from '@angular/router';
 
@@ -16,9 +15,7 @@ export class DepotComptePage implements OnInit {
   activeListe = true;
   activeNouveau = false;
   formMontant: FormGroup;
-  montant: AbstractControl;
-  helper = new JwtHelperService() ;
-  idUser: number;
+  montantDeDepot: AbstractControl;
   errorMessage: string;
 
   constructor(private formBuilder: FormBuilder, private depotService: DepotService, private authService: AuthService,
@@ -26,14 +23,9 @@ export class DepotComptePage implements OnInit {
 
   ngOnInit() {
     this.formMontant = this.formBuilder.group({
-      montant: ['', [Validators.required]]
+      montantDeDepot: ['', [Validators.required]]
     });
-    this.montant = this.formMontant.controls.montant;
-
-    // get id user
-    const token = this.authService.getToken() ;
-    this.idUser = this.helper.decodeToken(token).id ;
-  //  console.log(this.idUser);
+    this.montantDeDepot = this.formMontant.controls.montantDeDepot;
   }
 
   segmentChanged(ev: any) {
@@ -56,32 +48,28 @@ export class DepotComptePage implements OnInit {
 
     await alert.present();
   }
-  async loadingDepot() {
-    // console.log(this.connected);
-    const loading = await this.loadingController.create({
-      cssClass: 'my-custom-class',
-      message: 'depot encours ...',
-      duration: 200
-    });
-    await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-    // console.log('Loading dismissed!');
-  }
-
-  deposer() {
-      if (this.formMontant.value.montant < 0) {
+  async deposer() {
+      const loading = await this.loadingController.create({
+        cssClass: 'my-custom-class',
+        message: 'depot encours ...'
+      });
+      await loading.present();
+      console.log(this.formMontant.value);
+      if (this.formMontant.value.montantDeDepot < 0) {
           this.errorMessage = 'Le montant ne peut pas être négatif!';
           return;
-      } else if (this.formMontant.value.montant === 0) {
+      } else if (this.formMontant.value.montantDeDepot === 0) {
           this.errorMessage = 'Le montant ne peut pas être null';
           return;
       }
-      this.depotService.depot(this.formMontant.value.montant, this.idUser).subscribe(data => {
-         this.loadingDepot();
+      this.depotService.depot(this.formMontant.value).subscribe(data => {
          this.successDepot(data);
          this.router.navigate(['homepage']);
+         loading.dismiss();
          this.formMontant.reset();
+      }, error => {
+          console.log(error);
+          loading.dismiss();
       });
   }
 }

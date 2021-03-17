@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
 import Swal from 'sweetalert2';
-import {AuthService} from '../../services/auth.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {TransactionService} from '../../services/transaction.service';
 import {Router} from '@angular/router';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-depot',

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TransactionService} from '../../services/transaction.service';
 
 @Component({
   selector: 'app-mes-transactions',
@@ -7,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MesTransactionsPage implements OnInit {
 
-  constructor() { }
+  mestransactions: any;
+  constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {
-    console.log('mes transactions');
+    this.transactionService.mesTransactions().subscribe(data => {
+      this.mestransactions = data;
+    });
   }
 
 }

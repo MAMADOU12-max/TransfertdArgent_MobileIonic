@@ -18,40 +18,41 @@ export class HomepagePage implements OnInit {
   useragence = false;
   adminagence = false;
   helper = new JwtHelperService() ;
-  avatar: any;
+  dataUser: any;
   idAgence: number;
   compte: any;
   photoExist = false;
 
   constructor(public alertController: AlertController, private router: Router, private authService: AuthService
-    , private userService: UserService, private compteService: CompteService) {}
+            , private userService: UserService, private compteService: CompteService) {}
   ngOnInit() {
     console.log('homepage!!!!!!!');
-    //
-    const token = this.authService.getToken() ;
+    const token =  localStorage.getItem('token') ;
     const tokenDecoded = this.helper.decodeToken(token) ;
 
     if (tokenDecoded.roles[0] === 'ROLE_USERAGENCE') {
-      this.useragence = true;
+        this.useragence = true;
     } else if (tokenDecoded.roles[0] === 'ROLE_ADMINSYSTEM') {
-      this.adminSystem = true;
+        this.adminSystem = true;
     } else if (tokenDecoded.roles[0] === 'ROLE_ADMINAGENCE') {
-      this.adminagence = true;
+        this.adminagence = true;
     } else if (tokenDecoded.roles[0] === 'ROLE_CAISSIER') {
-      this.caissier = true;
+        this.caissier = true;
     }
 
     // console.log(tokenDecoded.id);
     this.userService.getUserById(tokenDecoded.id).subscribe(data => {
-      this.avatar = data['avatar'];
-      if (this.avatar != null) {
-        this.photoExist = true;
-      }
-      this.idAgence = data['agence']['id'] ;
-    });
-    this.compteService.compteByidAgence(4).subscribe(compte => {
-      this.compte = compte;
-      // console.log(this.compte);
+    //  avatar user;
+        this.dataUser = data;
+        if (this.dataUser.avatar != null) {
+          this.photoExist = true;
+        }
+        this.idAgence = this.dataUser.agence.id;
+         // console.log(this.idAgence);
+        this.compteService.compteByidAgence(this.idAgence).subscribe(compte => {
+          this.compte = compte;
+            // console.log(this.compte);
+        });
     });
   }
 
