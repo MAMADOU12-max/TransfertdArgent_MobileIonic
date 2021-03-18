@@ -14,15 +14,15 @@
           </ion-grid>
         </ion-card-header>
         <ion-card-content class="ion-align-items-center">
-          <ion-grid>
-            <ion-row class="ion-justify-content-center">
-              <ion-col size="5" size-sm="3" offset-sm="1" offset-md="2">
-                <div class="aboveDepot">
-                  <ion-icon id="depotIcon" src="assets/icon/retrait.svg" alt="retrait" ></ion-icon>Retrait
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
+            <ion-grid>
+                <ion-row>
+                    <ion-col style="display: flex; justify-content: center">
+                        <div class="aboveDepot">
+                            <ion-icon id="depotIcon" src="assets/icon/retrait.svg" alt="retrait"></ion-icon>Retrait
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </ion-card-content>
       </ion-card>
     </ion-toolbar>
@@ -96,7 +96,7 @@
 
           <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom" style="margin-bottom: 21px">
               <ion-col class="ion-margin-bottom">
-                  <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="tertiary" shape="round" (click)="Suivant()">Suivant</ion-button>
+                  <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="secondary" shape="round" (click)="Suivant()">Suivant</ion-button>
               </ion-col>
           </ion-row>
 
@@ -105,37 +105,33 @@
     </ion-col>
 
     <ion-col class="wrapper" *ngIf="activeBenefice && validerCode">
-<!--      *ngIf="activeBenefice && validerCode"-->
-      <div class="scrollbar style-3">
-        <div class="force-overflow">
+        <div class="scrollbar style-3">
+            <div class="force-overflow">
 
-          <ion-item class="ion-margin-bottom">
-            <ion-label position="">Nom</ion-label>
-            <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.nom}}</span>
-          </ion-item>
+              <ion-item class="ion-margin-bottom">
+                <ion-label position="">Nom</ion-label>
+                <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.nom}}</span>
+              </ion-item>
 
-          <ion-item class="ion-margin-bottom">
-              <ion-label position="">Prénom</ion-label>
-              <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.prenom}}</span>
-          </ion-item>
+              <ion-item class="ion-margin-bottom">
+                  <ion-label position="">Prénom</ion-label>
+                  <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.prenom}}</span>
+              </ion-item>
 
-          <ion-item class="ion-margin-bottom">
-            <ion-label position="">Téléphone</ion-label>
-            <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.phone}}</span>
-          </ion-item>
+              <ion-item class="ion-margin-bottom">
+                  <ion-label position="">Téléphone</ion-label>
+                  <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.phone}}</span>
+              </ion-item>
 
-          <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
-                <ion-col class="ion-margin-bottom" >
-    <!--                  <ion-button class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="tertiary" shape="round">Valider le retrait</ion-button>-->
-    <!--                  <ion-button class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="tertiary" shape="round">Annuler</ion-button>-->
-
+              <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
+                  <ion-col class="ion-margin-bottom" >
                       <ion-button color="danger" class="ion-margin-bottom" (click)="cancelRetrait()" >Annuler</ion-button>
                       <ion-button color="secondary" class="ion-margin-bottom" (click)="confirmRetrait()">Confirmer</ion-button>
-                </ion-col>
-          </ion-row>
+                  </ion-col>
+              </ion-row>
 
+            </div>
         </div>
-      </div>
     </ion-col>
 
 </div>

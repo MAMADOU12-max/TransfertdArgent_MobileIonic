@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AlertController} from '@ionic/angular';
-import {NavigationEnd, Router} from '@angular/router';
+import { Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {UserService} from '../../services/user.service';
@@ -26,7 +26,7 @@ export class HomepagePage implements OnInit {
   constructor(public alertController: AlertController, private router: Router, private authService: AuthService
             , private userService: UserService, private compteService: CompteService) {}
   ngOnInit() {
-    console.log('homepage!!!!!!!');
+
     const token =  localStorage.getItem('token') ;
     const tokenDecoded = this.helper.decodeToken(token) ;
 
@@ -48,7 +48,7 @@ export class HomepagePage implements OnInit {
           this.photoExist = true;
         }
         this.idAgence = this.dataUser.agence.id;
-         // console.log(this.idAgence);
+        // console.log(this.idAgence);
         this.compteService.compteByidAgence(this.idAgence).subscribe(compte => {
           this.compte = compte;
             // console.log(this.compte);
@@ -78,18 +78,9 @@ export class HomepagePage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 
-  // ngAfterViewInit(){
-  //   console.log('Home ngAfterViewInit');
-  // }
-
-  retrait() {
-    console.log('test');
-     this.router.navigate(['/tabs/retrait']);
-  }
 }
 
 

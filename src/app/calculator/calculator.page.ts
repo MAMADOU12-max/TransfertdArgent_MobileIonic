@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
 import {FraisService} from '../../services/frais.service';
-import {logger} from 'codelyzer/util/logger';
 
 @Component({
   selector: 'app-calculator',

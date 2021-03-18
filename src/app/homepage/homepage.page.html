@@ -1,26 +1,30 @@
 <ion-content >
-  <ion-grid class="contain">
-    <ion-row id="header" class="ion-justify-content-around ion-margin-top">
-      <ion-col size="2" class="ion-margin-top">
-        <div>
-          <ion-icon name="menu"  size="large"></ion-icon>
-        </div>
-      </ion-col>
-      <ion-col size="3" class="">
-        <div>
-          <ion-img src="assets/icon/logo.png"></ion-img>
-        </div>
-      </ion-col>
-      <ion-col size="2" class="ion-margin-top">
-        <div *ngIf="photoExist">
-          <img src="data:image/jpeg;base64,{{dataUser.avatar}}" alt="avatar" class="avatar">
+   <ion-grid class="contain">
+<!--    <ion-row id="header" class="ion-justify-content-around ion-margin-top">-->
+<!--        <ion-col size="2" class="ion-margin-top">-->
+<!--          <div routerLink="/menu">-->
+<!--            <ion-icon name="menu"  size="large"></ion-icon>-->
+<!--          </div>-->
+<!--        </ion-col>-->
+<!--        <ion-col size="3" class="">-->
+<!--          <div>-->
+<!--            <ion-img src="assets/icon/logo.png"></ion-img>-->
+<!--          </div>-->
+<!--        </ion-col>-->
+<!--        <ion-col size="2" class="ion-margin-top">-->
+<!--          <div *ngIf="photoExist">-->
+<!--            <img src="data:image/jpeg;base64,{{dataUser.avatar}}" alt="avatar" class="avatar">-->
 
-        </div>
-        <div *ngIf="!photoExist">
-          <img src="assets/images/avatar.jpeg" alt="avatar" class="avatar">
-        </div>
-      </ion-col>
-    </ion-row>
+<!--          </div>-->
+<!--          <div *ngIf="!photoExist">-->
+<!--            <img src="assets/images/avatar.jpeg" alt="avatar" class="avatar">-->
+<!--          </div>-->
+<!--        </ion-col>-->
+<!--      </ion-row>-->
+<!--     <ion-row id="header" class="ion-justify-content-around ion-margin-top">-->
+
+         <app-menu></app-menu>
+<!--     </ion-row>-->
   </ion-grid>
 
   <ion-grid class="ion-margin-top">
@@ -66,14 +70,24 @@
             <ion-label>Dépôt</ion-label>
           </ion-item>
 
-          <ion-item routerLink="/tabs/mes-transactions">
-            <ion-icon slot="start" src="assets/icon/transaction.svg" class="component-icon component-icon-primary"></ion-icon>
-            <ion-label>Mes transactions</ion-label>
+          <ion-item routerLink="/tabs/mes-transactions" *ngIf="useragence">
+              <ion-icon slot="start" src="assets/icon/transaction.svg" class="component-icon component-icon-primary"></ion-icon>
+              <ion-label>Mes transactions</ion-label>
           </ion-item>
 
-          <ion-item routerLink="/tabs/toutesles-transactions">
-            <ion-icon slot="start"  src="assets/icon/all-transaction.svg" class="component-icon component-icon-primary"></ion-icon>
-            <ion-label>Toutes les transactions</ion-label>
+          <ion-item routerLink="/tabs/toutesles-transactions" *ngIf="useragence || caissier || adminagence">
+              <ion-icon slot="start"  src="assets/icon/all-transaction.svg" class="component-icon component-icon-primary"></ion-icon>
+              <ion-label>Toutes les transactions</ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="adminSystem || adminagence" routerLink="/tabs/add-user">
+              <ion-icon slot="start" name="person-add-outline"></ion-icon>
+              <ion-label title="ajouter un utilisateur">Ajouter un utilisateur</ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="adminSystem || adminagence">
+              <ion-icon slot="start" name="people-circle-outline"></ion-icon>
+              <ion-label>Lister les utilisateurs</ion-label>
           </ion-item>
 
           <ion-item routerLink="/tabs/mes-commissions" *ngIf="adminSystem">
@@ -86,10 +100,10 @@
             <ion-label>Calculateur de frais</ion-label>
           </ion-item>
 
-          <ion-item (click)="disconnect()"  class="">
-            <ion-icon slot="start"  src="assets/icon/exit.svg" class="component-icon component-icon-primary"></ion-icon>
-            <ion-label>Deconnexion</ion-label>
-          </ion-item>
+            <ion-item (click)="disconnect()"  class="">
+                <ion-icon slot="start"  src="assets/icon/exit.svg" class="component-icon component-icon-primary"></ion-icon>
+                <ion-label>Deconnexion</ion-label>
+            </ion-item>
         </ion-list>
 
       </ion-col>

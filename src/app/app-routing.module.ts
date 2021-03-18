@@ -57,6 +57,14 @@ const routes: Routes = [
   {
     path: 'homepage',
     loadChildren: () => import('./homepage/homepage.module').then( m => m.HomepagePageModule)
+  },
+  {
+    path: 'menu',
+    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
+  },
+  {
+    path: 'add-user',
+    loadChildren: () => import('./add-user/add-user.module').then( m => m.AddUserPageModule)
   }
 ];
 @NgModule({

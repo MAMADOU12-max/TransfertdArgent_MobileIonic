@@ -60,6 +60,10 @@ const routes: Routes = [
       {
         path: 'depot-compte',
         loadChildren: () => import('../depot-compte/depot-compte.module').then( m => m.DepotComptePageModule)
+      },
+      {
+        path: 'add-user',
+        loadChildren: () => import('../add-user/add-user.module').then( m => m.AddUserPageModule)
       }
     ]
   },

@@ -6,18 +6,41 @@ ion-content {
 
 }
 // ------------------------------------------- Header -------------------------------------------//
-#header{
-  margin: 0 auto;
-  position: fixed;
-  background-color: rgb(255 255 255);
-  padding:0;
-  width: 100%;
-}
-.avatar{
-  height: 36px;
-  width: 36px;
-  border-radius: 50%;
-}
+//ion-grid {
+//  height: 100%;
+//  background: white;
+//  overflow-y: scroll;
+//  padding-top: 1px;
+//}
+//
+//.scrollbar {
+//  height: 100%;
+//  //min-height: 300px;
+//  background: white;
+//  overflow-y: scroll;
+//  //padding: 25px;
+//  padding-top: 1px;
+//}
+//
+//.force-overflow {
+//  height: 100px;
+//}
+//.wrapper {
+//  text-align: center;
+//  width: 700px;
+//  margin: auto;
+//}
+//.style-3::-webkit-scrollbar-track {
+//  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+//  background-color: white;
+//}
+//.style-3::-webkit-scrollbar {
+//  width: 1px;
+//  background-color: white;
+//}
+//.style-3::-webkit-scrollbar-thumb {
+//  background-color: white;
+//}
 
 // ----------------------------------------------- ion card --------------------------------------//
 .solde{

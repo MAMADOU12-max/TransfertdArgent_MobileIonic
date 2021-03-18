@@ -48,16 +48,16 @@ export class RetraitPage implements OnInit {
            }
           // console.log(this.formCode.value.codeTransaction); return;
             this.transactionService.getRetraitByCode(this.formCode.value.codeTransaction).subscribe(data => {
-              //  console.log(data);
-              this.dataClient = data[1] ;
-              this.dataBeneficiaire = data[2];
-              this.validerCode = true;
-              this.activeEmetteur = true;
-              this.activeBenefice = false;
-              loading.dismiss();
-              }, error => {
-              loading.dismiss();
-              this.errorCode = error.error;
+                    console.log(data);
+                    this.dataClient = data[1] ;
+                    this.dataBeneficiaire = data[2];
+                    this.validerCode = true;
+                    this.activeEmetteur = true;
+                    this.activeBenefice = false;
+                    loading.dismiss();
+                }, error => {
+                loading.dismiss();
+                this.errorCode = error.error;
           });
       }
       segmentChanged(ev: any) {

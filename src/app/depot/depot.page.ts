@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
-import Swal from 'sweetalert2';
 import {JwtHelperService} from '@auth0/angular-jwt';
 import {TransactionService} from '../../services/transaction.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {FraisService} from '../../services/frais.service';
 
 @Component({
   selector: 'app-depot',
@@ -16,9 +16,9 @@ export class DepotPage implements OnInit {
 
   activeBenefice = false;
   activeEmetteur = true;
-  montant: AbstractControl;
-  frais: AbstractControl;
-  total: AbstractControl;
+  montant: number;
+  frais: any = 0;
+  montantget: number;
   user: number;
   nomCompletEmetteur: string;
   nomCompletBeneficiaire: string;
@@ -31,19 +31,18 @@ export class DepotPage implements OnInit {
   phoneBeneficiaire: AbstractControl;
   depotForm: FormGroup;
   helper = new JwtHelperService() ;
+  otherForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, public alertController: AlertController, private router: Router,
-              private authService: AuthService, private transactionService: TransactionService) { }
+              private authService: AuthService, private transactionService: TransactionService, private fraisService: FraisService) { }
 
   ngOnInit() {
       const token = this.authService.getToken() ;
       const tokenDecoded = this.helper.decodeToken(token) ;
        // console.log(tokenDecoded['id']);
       this.depotForm = this.formBuilder.group({
-          // frais: [''],
           user: [tokenDecoded.id, []],
           montant: ['', [Validators.required]],
-          // total: ['', [Validators.required]],
           nomEmetteur: ['', [Validators.required]],
           prenomEmetteur: ['', [Validators.required]],
           nomBeneficaire: ['', [Validators.required]],
@@ -53,7 +52,7 @@ export class DepotPage implements OnInit {
           phoneBeneficiaire: ['', [Validators.required]]
       });
       // this.frais = this.depotForm.controls.frais;
-      this.montant = this.depotForm.controls.montant;
+      // this.montant = this.depotForm.controls.montant;
       // this.total = this.depotForm.controls.total;
       this.nomEmetteur = this.depotForm.controls.nomEmetteur;
       this.prenomEmetteur = this.depotForm.controls.prenomEmetteur;
@@ -62,6 +61,11 @@ export class DepotPage implements OnInit {
       this.prenomBeneficaire = this.depotForm.controls.prenomBeneficaire;
       this.phoneBeneficiaire = this.depotForm.controls.phoneBeneficiaire;
       this.identityNumberEmetteur = this.depotForm.controls.identityNumberEmetteur;
+
+      this.otherForm = this.formBuilder.group({
+          montantget: ['', [Validators.required]],
+      });
+
   }
 
     segmentChanged(ev: any) {
@@ -92,9 +96,34 @@ export class DepotPage implements OnInit {
       await alert.present();
     }
 
+  realmontant($event: KeyboardEvent) {
+    // console.log(this.montantget);
+    if (this.montantget === null) {
+      this.frais = 0;
+      this.montant = 0;
+      return;
+    }
+    this.fraisService.returnFrais(this.montantget).subscribe( reponse => {
+        this.frais = reponse;
+        this.montant = this.montantget + this.frais;
+      });
+    }
+    totalmontant($event: KeyboardEvent) {
+        // console.log(this.montant);
+        if (this.montant === null) {  return; }
+        this.fraisService.returnFrais(this.montant).subscribe( reponse => {
+            this.frais = reponse;
+            if ((this.montant - this.frais) < 0) {
+              this.montantget = 0;
+            } else {
+              this.montantget = this.montant - this.frais;
+            }
+        });
+    }
+
   async Terminer() {
-       console.log(this.depotForm.value);
-       const alert = await this.alertController.create({
+       // console.log(this.depotForm.value); return;
+        const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: 'Confirmation',
         message: ` <br>EMETTEUR <h4>${this.depotForm.value.prenomEmetteur} ${this.depotForm.value.nomEmetteur}</h4>
@@ -126,8 +155,7 @@ export class DepotPage implements OnInit {
           }
         ]
       });
-
-       await alert.present();
-
+        await alert.present();
     }
+
 }

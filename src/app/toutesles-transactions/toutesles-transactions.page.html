@@ -47,48 +47,48 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-col class="wrapper">
-    <div class="scrollbar style-3">
-      <div class="force-overflow">
-        <ion-grid>
-            <ion-row>
-                <ion-col col-4>
-                  Date
-                </ion-col>
-                <ion-col col-2>
-                  Utilisateur
-                </ion-col>
-                <ion-col col-2>
-                  Type
-                </ion-col>
-                <ion-col col-2>
-                  Montant
-                </ion-col>
-<!--                <ion-col col-2>-->
-<!--                  Frais-->
-<!--                </ion-col>-->
-            </ion-row>
-        </ion-grid>
-        <ion-grid>
-            <ion-row *ngFor="let transaction of alltransactions">
-                <ion-col >
-                  {{transaction?.date}}
-                </ion-col>
-                <ion-col >
-                  {{transaction?.user}}
-                </ion-col>
-                <ion-col >
-                  {{transaction?.type}}
-                </ion-col>
-                <ion-col >
-                  {{transaction?.montant}}
-                </ion-col>
-<!--                <ion-col size="1">-->
-<!--                  {{transaction?.frais}}-->
-<!--                </ion-col>-->
-            </ion-row>
-        </ion-grid>
-      </div>
-    </div>
-  </ion-col>
+    <ion-col class="wrapper ">
+         <div class="scrollbar style-3">
+          <div class="force-overflow">
+            <ion-grid fixed>
+                <ion-row>
+                    <ion-col>
+                        <div>Date</div>
+                    </ion-col>
+                    <ion-col>
+                        <div>User</div>
+                    </ion-col>
+                    <ion-col>
+                        <div>Type</div>
+                    </ion-col>
+                    <ion-col>
+                        <div>Montant</div>
+                    </ion-col>
+                    <ion-col>
+                        <div>Frais</div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <ion-grid>
+                <ion-row *ngFor="let transaction of alltransactions">
+                    <ion-col>
+                         <div>{{transaction?.date}}</div>
+                    </ion-col>
+                    <ion-col>
+                        <div>{{transaction?.user}}</div>
+                    </ion-col>
+                    <ion-col>
+                        <div>{{transaction?.type}}</div>
+                    </ion-col>
+                    <ion-col>
+                        <div>{{transaction?.montant}}</div>
+                    </ion-col>
+                    <ion-col>
+                        <div>{{transaction?.frais}}</div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+          </div>
+         </div>
+     </ion-col>
 </div>
