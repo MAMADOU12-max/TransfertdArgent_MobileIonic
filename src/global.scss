@@ -30,3 +30,13 @@
   --spinner-color: #488688;
   color: #fff;
 }
+// remove defaut scrollbar ionic
+//ion-content {
+//  background-color: white;
+//  --offset-bottom: auto!important;
+//  --overflow: hidden;
+//  overflow: auto;
+//  &::-webkit-scrollbar {
+//    display: none;
+//  }
+//}

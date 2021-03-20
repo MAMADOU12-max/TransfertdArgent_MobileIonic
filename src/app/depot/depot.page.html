@@ -1,133 +1,136 @@
-<form [formGroup]="depotForm">
-    <ion-header translucent={true}>
-        <ion-toolbar>
-            <ion-card class="ion-justify-content-center header">
-                <ion-card-header>
-                    <ion-grid>
-                        <ion-row class="ion-justify-content-center">
-                            <ion-col size-lg="1" size-md="1" size-sm="3" size="5">
-                                <div>
-                                    <img src="assets/icon/logo.png"/>
-                                </div>
+<ion-header translucent={true}>
+   <ion-row class="ion-justify-content-center">
+       <ion-col size="12" size-sm="10" size-md="8">
+         <ion-toolbar>
+           <ion-card class="ion-justify-content-center header">
+             <ion-card-header>
+               <ion-grid>
+                 <ion-row class="ion-justify-content-center">
+                     <ion-col size-sm="3" offset-sm="1" size="5" offset-lg="1">
+                         <div>
+                            <img src="assets/icon/logo.png"/>
+                         </div>
+                     </ion-col>
+                 </ion-row>
+               </ion-grid>
+             </ion-card-header>
+             <ion-card-content class="ion-align-items-center">
+               <ion-grid>
+                 <ion-row class="ion-justify-content-center">
+                     <ion-col size-sm="2" size="4" size-md="1">
+                         <div class="aboveDepot">
+                              <ion-icon id="depotIcon" src="assets/icon/depot.svg" alt="depot"></ion-icon>Dépôt
+                         </div>
+                     </ion-col>
+                 </ion-row>
+               </ion-grid>
+             </ion-card-content>
+           </ion-card>
+         </ion-toolbar>
+         <ion-toolbar class="ion-justify-content-center">
+           <ion-col id="choice">
+             <ion-segment (ionChange)="segmentChanged($event)">
+               <ion-segment-button value="emetteur">
+                 <ion-label>Emetteur</ion-label>
+               </ion-segment-button>
+               <ion-segment-button value="bénéficiaire">
+                 <ion-label>Bénéficiaire</ion-label>
+               </ion-segment-button>
+             </ion-segment>
+           </ion-col>
+         </ion-toolbar>
+       </ion-col>
+   </ion-row>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="depotForm">
+
+        <ion-grid>
+             <ion-row class="ion-justify-content-center">
+                 <ion-col *ngIf="activeEmetteur" size="10" size-sm="8" size-md="6" size-lg="6">
+                      <ion-item lines="full" class=" ion-margin-bottom">
+                           <ion-label position="floating">N° CNI</ion-label>
+                           <ion-input type="number" required formControlName="identityNumberEmetteur"></ion-input>
+                       </ion-item>
+                       <ion-label color="danger" class="error"  *ngIf="identityNumberEmetteur.hasError('required') && identityNumberEmetteur.touched">Veuillez entrer votre CNI!</ion-label>
+
+                       <ion-item lines="full" class="ion-margin-bottom">
+                           <ion-label position="floating">Nom</ion-label>
+                           <ion-input type="text" required formControlName="nomEmetteur"></ion-input>
+                       </ion-item>
+                       <ion-label color="danger" class="error" *ngIf="nomEmetteur.hasError('required') && nomEmetteur.touched">Veuillez bien saisir le nom de l'émetteur!</ion-label>
+
+                       <ion-item lines="full" class=" ion-margin-bottom">
+                           <ion-label position="floating">Prénom</ion-label>
+                           <ion-input type="text" required formControlName="prenomEmetteur"></ion-input>
+                       </ion-item>
+                       <ion-label color="danger" class="error" *ngIf="prenomEmetteur.hasError('required') && prenomEmetteur.touched">Veuillez bien saisir le prénom de l'émetteur!</ion-label>
+
+                       <ion-item lines="full" class="ion-margin-bottom">
+                             <ion-label position="floating">Téléphone</ion-label>
+                             <ion-input type="number" required formControlName="phoneEmetteur"></ion-input>
+                       </ion-item>
+                       <ion-label  color="danger" *ngIf="phoneEmetteur.hasError('required') && phoneEmetteur.touched" class="ion-justify-content-center error">Veuillez saisir le numéro de l'émetteur!</ion-label>
+
+                     <form [formGroup]="otherForm">
+                       <ion-item lines="full" class="ion-margin-bottom">
+                           <ion-label position="floating" >Montant</ion-label>
+                           <ion-input type="number" required name="montantget" formControlName="montantget" [(ngModel)]="montantget" (keyup)="realmontant($event)"></ion-input>
+                       </ion-item>
+                     </form>
+       <!--                <ion-label color="danger" class="ion-justify-content-center error" *ngIf="montant.hasError('required') && montant.touched">Précisez le montant!</ion-label>-->
+
+                       <ion-item  lines="full" class="ion-margin-bottom fraisItem">
+                           <ion-label position="floating">Frais</ion-label>
+                           <ion-input class="fraisInput" value="{{frais}}" disabled></ion-input>
+                       </ion-item>
+       <!--                <ion-label color="danger" class="ion-justify-content-center error" *ngIf="phoneEmetteur.hasError('required') && phoneEmetteur.touched">Lorem ipsum dolor sit amet.</ion-label>-->
+
+                       <ion-item lines="full" class="ion-margin-bottom">
+                           <ion-label position="floating">Total</ion-label>
+                           <ion-input type="number" required formControlName="montant"  value="{{montant}}" [(ngModel)]="montant" (keyup)="totalmontant($event)"></ion-input>
+                       </ion-item>
+       <!--                <ion-label color="danger" class="ion-justify-content-center error" *ngIf="montant.hasError('required') && montant.touched">Précisez le montant total à envoyer!</ion-label>-->
+
+                       <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
+                           <ion-col class="ion-margin-bottom">
+                                <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" [disabled]="depotForm.invalid" color="tertiary" shape="round" (click)="Terminer()">Valider</ion-button>
+                           </ion-col>
+                       </ion-row>
+                 </ion-col>
+             </ion-row>
+        </ion-grid>
+
+        <ion-grid>
+            <ion-row *ngIf="activeBenefice" class="ion-justify-content-center">
+                  <ion-col ize="10" size-sm="8" size-md="6" size-lg="6">
+                        <ion-item lines="full" class="ion-margin-bottom">
+                          <ion-label position="floating">Nom</ion-label>
+                          <ion-input type="text" required formControlName="nomBeneficaire"></ion-input>
+                        </ion-item>
+                        <ion-label color="danger" class="error" *ngIf="nomBeneficaire.hasError('required') && nomBeneficaire.touched">Veuillez bien saisir le nom du bénéficiaire!</ion-label>
+
+                        <ion-item lines="full" class="ion-margin-bottom">
+                          <ion-label position="floating">Prénom</ion-label>
+                          <ion-input type="text" required formControlName="prenomBeneficaire"></ion-input>
+                        </ion-item>
+                        <ion-label color="danger" class="error" *ngIf="prenomBeneficaire.hasError('required') && prenomBeneficaire.touched">Veuillez bien saisir le prénom du bénéficiaire!</ion-label>
+
+                        <ion-item lines="full" class="ion-margin-bottom">
+                          <ion-label position="floating">Téléphone</ion-label>
+                          <ion-input type="number" formControlName="phoneBeneficiaire" required></ion-input>
+                        </ion-item>
+                        <ion-label color="danger" class="error" *ngIf="phoneBeneficiaire.hasError('required') && phoneBeneficiaire.touched">Ajoutez le numéro du bénéficiaire</ion-label>
+
+                        <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
+                            <ion-col class="ion-margin-bottom">
+                                <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" [disabled]="depotForm.invalid" color="tertiary" shape="round" (click)="Terminer()">Valider</ion-button>
                             </ion-col>
                         </ion-row>
-                    </ion-grid>
-                </ion-card-header>
-                <ion-card-content class="ion-align-items-center">
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col style="display: flex; justify-content: center">
-                                <div class="aboveDepot">
-                                    <ion-icon id="depotIcon" src="assets/icon/depot.svg" alt="depot"></ion-icon>Dépôt
-                                </div>
-                            </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </ion-card-content>
-            </ion-card>
-        </ion-toolbar>
-        <ion-toolbar>
-            <ion-col id="choice" size="12">
-                  <ion-segment (ionChange)="segmentChanged($event)">
-                      <ion-segment-button value="emetteur">
-                          <ion-label>Emetteur</ion-label>
-                      </ion-segment-button>
-                      <ion-segment-button value="bénéficiaire">
-                           <ion-label>Bénéficiaire</ion-label>
-                      </ion-segment-button>
-                  </ion-segment>
-            </ion-col>
-        </ion-toolbar>
-    </ion-header>
+                  </ion-col>
+            </ion-row>
+        </ion-grid>
 
-    <ion-col class="wrapper" *ngIf="activeEmetteur">
-        <div class="scrollbar style-3" >
-            <div class="force-overflow">
-
-                <ion-item lines="full" class=" ion-margin-bottom">
-                    <ion-label position="floating">N° CNI</ion-label>
-                    <ion-input type="number" required formControlName="identityNumberEmetteur"></ion-input>
-                </ion-item>
-                <ion-label color="danger" class="ion-justify-content-center error"  *ngIf="identityNumberEmetteur.hasError('required') && identityNumberEmetteur.touched">Veuillez entrer votre CNI!</ion-label>
-
-                <ion-item lines="full" class="ion-margin-bottom">
-                    <ion-label position="floating">Nom</ion-label>
-                    <ion-input type="text" required formControlName="nomEmetteur"></ion-input>
-                </ion-item>
-                <ion-label color="danger" class="ion-justify-content-center error" *ngIf="nomEmetteur.hasError('required') && nomEmetteur.touched">Veuillez bien saisir le nom de l'émetteur!</ion-label>
-
-                <ion-item lines="full" class=" ion-margin-bottom">
-                    <ion-label position="floating">Prénom</ion-label>
-                    <ion-input type="text" required formControlName="prenomEmetteur"></ion-input>
-                </ion-item>
-                <ion-label color="danger" class="ion-justify-content-center error" *ngIf="prenomEmetteur.hasError('required') && prenomEmetteur.touched">Veuillez bien saisir le prénom de l'émetteur!</ion-label>
-
-                <ion-item lines="full" class="ion-margin-bottom">
-                      <ion-label position="floating">Téléphone</ion-label>
-                      <ion-input type="number" required formControlName="phoneEmetteur"></ion-input>
-                </ion-item>
-                <ion-label  color="danger" *ngIf="phoneEmetteur.hasError('required') && phoneEmetteur.touched" class="ion-justify-content-center error">Veuillez saisir le numéro de l'émetteur!</ion-label>
-
-              <form [formGroup]="otherForm">
-                <ion-item lines="full" class="ion-margin-bottom">
-                    <ion-label position="floating" >Montant</ion-label>
-                    <ion-input type="number" required name="montantget" formControlName="montantget" [(ngModel)]="montantget" (keyup)="realmontant($event)"></ion-input>
-                </ion-item>
-              </form>
-<!--                <ion-label color="danger" class="ion-justify-content-center error" *ngIf="montant.hasError('required') && montant.touched">Précisez le montant!</ion-label>-->
-
-                <ion-item  lines="full" class="ion-margin-bottom fraisItem">
-                    <ion-label position="floating">Frais</ion-label>
-                    <ion-input class="fraisInput" value="{{frais}}" disabled></ion-input>
-                </ion-item>
-<!--                <ion-label color="danger" class="ion-justify-content-center error" *ngIf="phoneEmetteur.hasError('required') && phoneEmetteur.touched">Lorem ipsum dolor sit amet.</ion-label>-->
-
-                <ion-item lines="full" class="ion-margin-bottom">
-                    <ion-label position="floating">Total</ion-label>
-                    <ion-input type="number" required formControlName="montant"  value="{{montant}}" [(ngModel)]="montant" (keyup)="totalmontant($event)"></ion-input>
-                </ion-item>
-<!--                <ion-label color="danger" class="ion-justify-content-center error" *ngIf="montant.hasError('required') && montant.touched">Précisez le montant total à envoyer!</ion-label>-->
-
-                <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
-                    <ion-col class="ion-margin-bottom">
-<!--                        <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="tertiary" shape="round" (click)="Suivant()">Suivant</ion-button>-->
-                      <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" [disabled]="depotForm.invalid" color="tertiary" shape="round" (click)="Terminer()">Valider</ion-button>
-                    </ion-col>
-                </ion-row>
-
-            </div>
-        </div>
-    </ion-col>
-
-    <ion-col class="wrapper" *ngIf="activeBenefice">
-        <div class="scrollbar style-3">
-            <div class="force-overflow">
-
-              <ion-item lines="full" class="ion-margin-bottom">
-                <ion-label position="floating">Nom</ion-label>
-                <ion-input type="text" required formControlName="nomBeneficaire"></ion-input>
-              </ion-item>
-              <ion-label color="danger" class="ion-justify-content-center error" *ngIf="nomBeneficaire.hasError('required') && nomBeneficaire.touched">Veuillez bien saisir le nom du bénéficiaire!</ion-label>
-
-              <ion-item lines="full" class="ion-margin-bottom">
-                <ion-label position="floating">Prénom</ion-label>
-                <ion-input type="text" required formControlName="prenomBeneficaire"></ion-input>
-              </ion-item>
-              <ion-label color="danger" class="ion-justify-content-center error" *ngIf="prenomBeneficaire.hasError('required') && prenomBeneficaire.touched">Veuillez bien saisir le prénom du bénéficiaire!</ion-label>
-
-               <ion-item lines="full" class="ion-margin-bottom">
-                    <ion-label position="floating">Téléphone</ion-label>
-                    <ion-input type="number" formControlName="phoneBeneficiaire" required></ion-input>
-                </ion-item>
-                <ion-label color="danger" *ngIf="phoneBeneficiaire.hasError('required') && phoneBeneficiaire.touched" class="ion-justify-content-center error">Ajoutez le numéro du bénéficiaire</ion-label>
-
-                <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
-                    <ion-col class="ion-margin-bottom">
-                        <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" [disabled]="depotForm.invalid" color="tertiary" shape="round" (click)="Terminer()">Valider</ion-button>
-                    </ion-col>
-                </ion-row>
-
-            </div>
-        </div>
-    </ion-col>
-</form>
+    </form>
+</ion-content>

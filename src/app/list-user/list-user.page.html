@@ -1,0 +1,62 @@
+<ion-header translucent={true}>
+    <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-sm="10" size-md="8" size-lg="6">
+            <ion-toolbar>
+                <ion-buttons slot="start" routerLink="/homepage">
+                  <ion-icon style="zoom:2.0;" name="arrow-back-circle-outline"></ion-icon>
+                </ion-buttons>
+                <ion-title tappable (click)="sortBy('username')">Liste
+                    <ion-icon name="arrow-down" *ngIf="sortUsername"></ion-icon>
+                    <ion-icon name="arrow-up" *ngIf="!sortUsername"></ion-icon>
+                </ion-title>
+                <ion-buttons slot="end">
+                    <ion-icon style="zoom:2.0; padding-right: 5px" name="apps" (click)="completeAction()"></ion-icon>
+                   <ion-icon routerLink="/tabs/add-user" name="add-circle" style="zoom:2.0;"></ion-icon>
+                </ion-buttons>
+            </ion-toolbar>
+            <ion-toolbar *ngIf="action">
+<!--                <form >-->
+                    <ion-row class="ion-justify-content-center">
+                         <ion-col size="12">
+                             <ion-item lines="full" class=" ion-margin-bottom">
+                                 <ion-label>Listez par profil</ion-label>
+                                 <ion-select [(ngModel)]="typeChoised" (ngModelChange)="typeUserChoised()">
+                                     <ion-select-option value="0">AdminAgence</ion-select-option>
+                                     <ion-select-option value="1">AdminSystème</ion-select-option>
+                                     <ion-select-option value="2">Caissier</ion-select-option>
+                                     <ion-select-option value="3">UserAgence</ion-select-option>
+                                     <ion-select-option value="4">Tout les utilisateurs</ion-select-option>
+                                 </ion-select>
+                             </ion-item>
+                         </ion-col>
+                         <ion-col size="12" style="display: flex; justify-content: center;height:40px">
+                             <input type="text" placeholder="rechercher un utilisateur par username"  [(ngModel)]="search" (ngModelChange)="toSearch()">
+                         </ion-col>
+                    </ion-row>
+<!--                </form>-->
+            </ion-toolbar>
+        </ion-col>
+    </ion-row>
+</ion-header>
+
+<ion-content fullscreen={true}>
+   <ion-grid>
+       <ion-row class="ion-justify-content-center">
+           <ion-col *ngIf="globaliste" size="11" size-sm="8" size-md="6" size-lg="4">
+              <ion-list *ngFor="let user of users">
+                  <ion-item tappable routerLink="/tabs/detail-user/{{user.id}}">
+                      <ion-avatar slot="start">
+                        <img *ngIf="user.avatar !== null" src="data:image/jpg;base64,{{user?.avatar}}" />
+                        <img *ngIf="user.avatar == null" src="assets/images/avatar.png" />
+                      </ion-avatar>
+                      <ion-label>
+                          <h2>{{user?.username}}</h2>
+                          <h3>{{user?.type}}</h3>
+                          <p>De {{user?.address}}, {{user?.firstname}} {{user?.lastname}}</p>
+                      </ion-label>
+                  </ion-item>
+              </ion-list>
+           </ion-col>
+       </ion-row>
+   </ion-grid>
+</ion-content>

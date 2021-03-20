@@ -1,0 +1,101 @@
+<!--  ---------------------------------REAL --------------------------------------->
+<ion-header translucent>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="10" size-sm="8" size-md="6" >
+      <ion-toolbar routerLink="/homepage">
+        <ion-buttons slot="start">
+          <ion-icon style="zoom:2.0;" name="arrow-back-circle-outline"></ion-icon>
+        </ion-buttons>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-sm="8" size-md="6" size-lg="8">
+            <div>
+              <ion-title>
+                <ion-icon style="zoom:1.7" name="person-add-outline"></ion-icon>
+              </ion-title>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-toolbar>
+    </ion-col>
+  </ion-row>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-sm="8" size-md="6" size-lg="4">
+                <ion-card>
+      <!--            <input type="file" formControlName="avatar" name="avatar" (change)="Uploadefiler($event)"  accept=".jpg, .jpeg, .png">-->
+                  <ion-card-header style="display: flex; justify-content: center">
+                        <ion-avatar *ngIf="avatar">
+                            <img src="data:image/jpg;base64,{{dataUser?.avatar}}" class="avatar">
+                        </ion-avatar>
+                        <ion-avatar *ngIf="!avatar">
+                            <img class="avatar" src="assets/images/avatar.png">
+                        </ion-avatar>
+                  </ion-card-header>
+
+                  <ion-card-content>
+
+                      <ion-item class="ion-margin-bottom">
+      <!--                    <ion-label class="ion-margin-bottom" position="floating">Nom</ion-label>-->
+                          <span>Nom</span>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataUser?.lastname}}</span>
+                      </ion-item>
+
+                      <ion-item class="ion-margin-bottom">
+                          <span>Prénom</span>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataUser?.firstname}}</span>
+                      </ion-item>
+
+                      <ion-item class="ion-margin-bottom">
+                          <span>Nom d'utilisateur</span>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataUser?.username}}</span>
+                      </ion-item>
+
+                      <ion-item class="ion-margin-bottom">
+                          <span>N° carte d'identité</span>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataUser?.identityNum}}</span>
+                      </ion-item>
+
+                      <ion-item class="ion-margin-bottom">
+                          <span>Téléphone</span>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataUser?.phone}}</span>
+                      </ion-item>
+
+                      <ion-item class="ion-margin-bottom">
+                          <span>Adresse</span>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataUser?.address}}</span>
+                      </ion-item>
+
+                      <ion-item class="ion-margin-bottom">
+                          <ion-label>Profil</ion-label>
+                          <span class="dataClient ion-margin-top">{{dataUser?.type}}</span>
+                      </ion-item>
+
+      <!--              <ion-item lines="full" class=" ion-margin-bottom">-->
+      <!--                <ion-label>Profil</ion-label>-->
+      <!--                <ion-select placeholder="définissez le profil ..." formControlName="profil">-->
+      <!--                  <ion-select-option  value="{{profil?.libelle}}" *ngFor="let profil of allProfis">{{profil?.libelle}}</ion-select-option>-->
+      <!--                </ion-select>-->
+      <!--              </ion-item>-->
+
+
+                      <ion-row *ngIf="permitted" class="ion-justify-content-end ion-margin-top ion-margin-bottom">
+                          <ion-col size="6">
+                              <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="secondary" shape="round">Modifier</ion-button>
+                          </ion-col>
+                          <ion-col size="6">
+                              <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="danger" shape="round" (click)="delete(dataUser.id)">Delete</ion-button>
+                          </ion-col>
+                      </ion-row>
+
+                  </ion-card-content>
+
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+

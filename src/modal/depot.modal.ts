@@ -1,8 +1,7 @@
 export class DepotModal{
   // tslint:disable-next-line:max-line-length
-  constructor(montant: number, user: number, nomEmetteur: string, prenomEmetteur: string, phoneEmetteur: string, identityNumberEmetteur: string, nomBeneficaire: string, prenomBeneficaire: string, phoneBeneficiaire: number) {
+  constructor(montant: number, nomEmetteur: string, prenomEmetteur: string, phoneEmetteur: string, identityNumberEmetteur: string, nomBeneficaire: string, prenomBeneficaire: string, phoneBeneficiaire: number) {
     this.montant = montant;
-    this.user = user;
     this.nomEmetteur = nomEmetteur;
     this.prenomEmetteur = prenomEmetteur;
     this.phoneEmetteur = phoneEmetteur;
@@ -13,7 +12,6 @@ export class DepotModal{
   }
 
     montant: number;
-    user: number;
     nomEmetteur: string;
     prenomEmetteur: string;
     phoneEmetteur: string;

@@ -1,47 +1,13 @@
-ion-content {
-  //Right
-  //--overflow: hidden;
-  overflow: auto;
-  //scrollbar-width: thin;
-
-}
 // ------------------------------------------- Header -------------------------------------------//
-//ion-grid {
-//  height: 100%;
-//  background: white;
-//  overflow-y: scroll;
-//  padding-top: 1px;
-//}
-//
-//.scrollbar {
-//  height: 100%;
-//  //min-height: 300px;
-//  background: white;
-//  overflow-y: scroll;
-//  //padding: 25px;
-//  padding-top: 1px;
-//}
-//
-//.force-overflow {
-//  height: 100px;
-//}
-//.wrapper {
-//  text-align: center;
-//  width: 700px;
-//  margin: auto;
-//}
-//.style-3::-webkit-scrollbar-track {
-//  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-//  background-color: white;
-//}
-//.style-3::-webkit-scrollbar {
-//  width: 1px;
-//  background-color: white;
-//}
-//.style-3::-webkit-scrollbar-thumb {
-//  background-color: white;
-//}
-
+ion-content {
+  background-color: white;
+  --offset-bottom: auto!important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 // ----------------------------------------------- ion card --------------------------------------//
 .solde{
   font-size: 0.8em;
@@ -71,10 +37,10 @@ ion-content {
   // color: black;
 }
 
-@media screen and (min-width: 730px) {
-  ion-content {
-    overflow: auto;
-    //scrollbar-width: thin;
-
-  }
-}
+//@media screen and (min-width: 730px) {
+//  ion-content {
+//    overflow: auto;
+//    //scrollbar-width: thin;
+//
+//  }
+//}

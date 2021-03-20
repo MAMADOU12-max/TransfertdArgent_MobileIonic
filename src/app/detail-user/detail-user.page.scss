@@ -7,8 +7,12 @@ ion-content {
     display: none;
   }
 }
-.error{
-  display: flex;
-  justify-content: center;
-  text-align: center;
+.dataClient {
+    margin-top: 60px;
+    margin-left: 0;
+    //margin-left: 70px;
+    font-weight: bold;
+    color: #87c4e2;
+    display: flex;
 }
+

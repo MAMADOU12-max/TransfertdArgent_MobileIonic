@@ -65,6 +65,22 @@ const routes: Routes = [
   {
     path: 'add-user',
     loadChildren: () => import('./add-user/add-user.module').then( m => m.AddUserPageModule)
+  },
+  {
+    path: 'forget-password',
+    loadChildren: () => import('./forget-password/forget-password.module').then( m => m.ForgetPasswordPageModule)
+  },
+  {
+    path: 'info-app-diouf-codeur',
+    loadChildren: () => import('./info-app-diouf-codeur/info-app-diouf-codeur.module').then( m => m.InfoAppDioufCodeurPageModule)
+  },
+  {
+    path: 'detail-user/:id',
+    loadChildren: () => import('./detail-user/detail-user.module').then( m => m.DetailUserPageModule)
+  },
+  {
+    path: 'list-user',
+    loadChildren: () => import('./list-user/list-user.module').then( m => m.ListUserPageModule)
   }
 ];
 @NgModule({

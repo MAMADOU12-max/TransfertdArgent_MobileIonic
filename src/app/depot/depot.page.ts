@@ -16,10 +16,9 @@ export class DepotPage implements OnInit {
 
   activeBenefice = false;
   activeEmetteur = true;
-  montant: number;
+  montant = 0;
   frais: any = 0;
-  montantget: number;
-  user: number;
+  montantget = 0;
   nomCompletEmetteur: string;
   nomCompletBeneficiaire: string;
   nomEmetteur: AbstractControl;
@@ -37,11 +36,7 @@ export class DepotPage implements OnInit {
               private authService: AuthService, private transactionService: TransactionService, private fraisService: FraisService) { }
 
   ngOnInit() {
-      const token = this.authService.getToken() ;
-      const tokenDecoded = this.helper.decodeToken(token) ;
-       // console.log(tokenDecoded['id']);
       this.depotForm = this.formBuilder.group({
-          user: [tokenDecoded.id, []],
           montant: ['', [Validators.required]],
           nomEmetteur: ['', [Validators.required]],
           prenomEmetteur: ['', [Validators.required]],
@@ -122,7 +117,7 @@ export class DepotPage implements OnInit {
     }
 
   async Terminer() {
-       // console.log(this.depotForm.value); return;
+        // console.log(this.depotForm.value); return;
         const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: 'Confirmation',

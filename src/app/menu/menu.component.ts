@@ -15,14 +15,15 @@ export class MenuComponent implements OnInit {
   idAgence: number;
   compte: any;
   photoExist = false;
+  tokenDecoded: any;
 
   constructor(private authService: AuthService, private userService: UserService) {}
   ngOnInit() {
-    console.log('homepage!!!!!!!');
+    // console.log('homepage!!!!!!!');
     const token =  localStorage.getItem('token') ;
-    const tokenDecoded = this.helper.decodeToken(token) ;
+    this.tokenDecoded = this.helper.decodeToken(token) ;
     // console.log(tokenDecoded.id);
-    this.userService.getUserById(tokenDecoded.id).subscribe(data => {
+    this.userService.getUserById(this.tokenDecoded.id).subscribe(data => {
         //  avatar user;
         this.dataUser = data;
         if (this.dataUser.avatar != null) {

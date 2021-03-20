@@ -25,7 +25,7 @@ span{
 
 }
 
-//***************************************************####**********************************************//
+//*************************************************####*****************************************//
 
 
 #form {
@@ -74,7 +74,27 @@ ion-item {
 }
 ion-label{
    color: darkred;
-  text-align: center;
+  justify-content: center;
   display: flex;
   font-size: .8em;
+}
+
+@media screen and (min-width: 500px){
+  .screendresponsive{
+    font-size: 1.3em;
+    padding-top: 100px;
+  }
+  .mdp{
+     font-size: 1.8em;
+  }
+}
+
+ion-content {
+  background-color: white;
+  --offset-bottom: auto!important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

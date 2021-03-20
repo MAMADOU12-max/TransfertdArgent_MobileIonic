@@ -1,137 +1,153 @@
-<div>
-  <ion-header translucent={true}>
-    <ion-toolbar>
-      <ion-card class="ion-justify-content-center header">
-        <ion-card-header>
-          <ion-grid>
-            <ion-row class="ion-justify-content-center">
-              <ion-col size-lg="1" size-md="1" size-sm="3" size="5">
-                <div>
-                  <img src="assets/icon/logo.png"/>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-header>
-        <ion-card-content class="ion-align-items-center">
-            <ion-grid>
-                <ion-row>
-                    <ion-col style="display: flex; justify-content: center">
-                        <div class="aboveDepot">
+ <ion-header translucent={true}>
+     <ion-row class="ion-justify-content-center">
+          <ion-col size="12" size-sm="10" size-md="8">
+              <ion-toolbar>
+                <ion-card class="ion-justify-content-center header">
+                  <ion-card-header>
+                    <ion-grid>
+                      <ion-row class="ion-justify-content-center">
+                        <ion-col size-lg="1" size-md="1" size-sm="3" size="5">
+                          <div>
+                            <img src="assets/icon/logo.png"/>
+                          </div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-header>
+                  <ion-card-content class="ion-align-items-center">
+                    <ion-grid>
+                      <ion-row>
+                        <ion-col style="display: flex; justify-content: center">
+                          <div class="aboveDepot">
                             <ion-icon id="depotIcon" src="assets/icon/retrait.svg" alt="retrait"></ion-icon>Retrait
-                        </div>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-content>
-      </ion-card>
-    </ion-toolbar>
+                          </div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+              </ion-toolbar>
 
-      <ion-toolbar  *ngIf="validerCode">
-<!--       -->
-          <ion-col id="choice" size="12">
-            <ion-segment (ionChange)="segmentChanged($event)">
-              <ion-segment-button value="emetteur">
-                <ion-label>Emetteur</ion-label>
-              </ion-segment-button>
-              <ion-segment-button value="bénéficiaire">
-                <ion-label>Bénéficiaire</ion-label>
-              </ion-segment-button>
-            </ion-segment>
+              <ion-toolbar  *ngIf="validerCode">
+                <!--       -->
+                <ion-col id="choice" size="12">
+                  <ion-segment (ionChange)="segmentChanged($event)">
+                    <ion-segment-button value="emetteur">
+                      <ion-label>Emetteur</ion-label>
+                    </ion-segment-button>
+                    <ion-segment-button value="bénéficiaire">
+                      <ion-label>Bénéficiaire</ion-label>
+                    </ion-segment-button>
+                  </ion-segment>
+                </ion-col>
+              </ion-toolbar>
           </ion-col>
-      </ion-toolbar>
+     </ion-row>
   </ion-header>
 
-<!--  <ion-content>-->
-    <ion-grid>
-<!--           Form Validate Code -->
-      <ion-row class="ion-justify-content-center" *ngIf="!validerCode">
-          <ion-col size="10" >
-              <ion-label id="labelCode">Code de transaction</ion-label>
-              <form id="form" [formGroup]="formCode">
-    <!--            <ion-label *ngIf="errorData">Username ou mot de passe incorrects!</ion-label>-->
+  <ion-content>
+      <ion-grid>
+      <!-- Form Validate Code -->
+          <ion-row class="ion-justify-content-center" *ngIf="!validerCode">
+              <ion-col size="10" size-sm="6">
+                  <ion-label id="labelCode">Code de transaction</ion-label>
+                  <form id="form" [formGroup]="formCode">
+        <!--            <ion-label *ngIf="errorData">Username ou mot de passe incorrects!</ion-label>-->
 
-                <ion-item class="ion-margin-bottom itemCode">
-                    <ion-input type="number" formControlName="codeTransaction" class="inputCode" placeholder="Entrez le code" ></ion-input>
-                </ion-item>
-                <ion-label  id="error">{{errorCode}}</ion-label>
-                <br>
-                <ion-button expand="block" class="validerButton" [disabled]="formCode.invalid" color="secondary" shape="round" (click)="valider()">Valider</ion-button>
-            </form>
-          </ion-col>
-      </ion-row>
-
-    </ion-grid>
-<!--  </ion-content>-->
-
-    <ion-col class="wrapper" *ngIf="activeEmetteur && validerCode" >
-<!--      *ngIf="activeEmetteur && validerCode"-->
-      <div class="scrollbar style-3">
-        <div class="force-overflow">
-
-          <ion-item lines="" class=" ion-margin-bottom">
-              <ion-label position="" class="ion-margin-bottom">N° CNI</ion-label>
-              <span class="dataClient ion-margin-top" slot="end">{{dataClient.identityNumber}}</span>
-          </ion-item>
-
-          <ion-item class="ion-margin-bottom">
-              <ion-label>Nom</ion-label>
-              <span class="dataClient ion-margin-top" slot="end">{{dataClient.nom}}</span>
-          </ion-item>
-
-          <ion-item class="ion-margin-bottom">
-              <ion-label>Prénom</ion-label>
-              <span class="dataClient ion-margin-top" slot="end">{{dataClient.prenom}}</span>
-          </ion-item>
-
-          <ion-item  class="ion-margin-bottom">
-              <ion-label>Téléphone</ion-label>
-              <span class="dataClient ion-margin-top" slot="end">{{dataClient.phone}}</span>
-          </ion-item>
-
-          <ion-item class="ion-margin-bottom">
-              <ion-label>Montant</ion-label>
-              <span class="dataClient ion-margin-top" slot="end">{{dataClient.montant}}</span>
-          </ion-item>
-
-          <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom" style="margin-bottom: 21px">
-              <ion-col class="ion-margin-bottom">
-                  <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="secondary" shape="round" (click)="Suivant()">Suivant</ion-button>
+                    <ion-item class="ion-margin-bottom itemCode">
+                        <ion-input type="number" formControlName="codeTransaction" class="inputCode" placeholder="Entrez le code" ></ion-input>
+                    </ion-item>
+                    <ion-label  id="error">{{errorCode}}</ion-label>
+                    <br>
+                    <ion-button expand="block" class="validerButton" [disabled]="formCode.invalid" color="secondary" shape="round" (click)="valider()">Valider</ion-button>
+                </form>
               </ion-col>
           </ion-row>
+      </ion-grid>
 
-        </div>
-      </div>
-    </ion-col>
+      <form  #form="ngForm">
+          <ion-grid>
+              <ion-row *ngIf="activeEmetteur && validerCode" class="ion-justify-content-center">
+                  <ion-col size="10" size-sm="6" size-lg="4">
+                      <ion-item lines="" class=" ion-margin-bottom">
+                          <ion-label position="" class="ion-margin-bottom">N° CNI</ion-label>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataClient.identityNumber}}</span>
+                      </ion-item>
 
-    <ion-col class="wrapper" *ngIf="activeBenefice && validerCode">
-        <div class="scrollbar style-3">
-            <div class="force-overflow">
+                      <ion-item class="ion-margin-bottom">
+                          <ion-label>Nom</ion-label>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataClient.nom}}</span>
+                      </ion-item>
 
-              <ion-item class="ion-margin-bottom">
-                <ion-label position="">Nom</ion-label>
-                <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.nom}}</span>
-              </ion-item>
+                      <ion-item class="ion-margin-bottom">
+                          <ion-label>Prénom</ion-label>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataClient.prenom}}</span>
+                      </ion-item>
 
-              <ion-item class="ion-margin-bottom">
-                  <ion-label position="">Prénom</ion-label>
-                  <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.prenom}}</span>
-              </ion-item>
+                      <ion-item  class="ion-margin-bottom">
+                          <ion-label>Téléphone</ion-label>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataClient.phone}}</span>
+                      </ion-item>
 
-              <ion-item class="ion-margin-bottom">
-                  <ion-label position="">Téléphone</ion-label>
-                  <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.phone}}</span>
-              </ion-item>
+                      <ion-item class="ion-margin-bottom">
+                          <ion-label>Montant</ion-label>
+                          <span class="dataClient ion-margin-top" slot="end">{{dataClient.montant}}</span>
+                      </ion-item>
 
-              <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
-                  <ion-col class="ion-margin-bottom" >
-                      <ion-button color="danger" class="ion-margin-bottom" (click)="cancelRetrait()" >Annuler</ion-button>
-                      <ion-button color="secondary" class="ion-margin-bottom" (click)="confirmRetrait()">Confirmer</ion-button>
+                      <ion-row class="ion-justify-content-center ion-margin-top ion-margin-bottom">
+                          <ion-col class="ion-margin-bottom"  size="6">
+                             <ion-button color="danger" class="ion-margin-bottom" expand="block"  (click)="cancelRetrait()" >Annuler</ion-button>
+                          </ion-col>
+                          <ion-col class="ion-margin-bottom" size="6" >
+                             <ion-button color="secondary" class="ion-margin-bottom" expand="block" (click)="confirmRetrait()">Confirmer</ion-button>
+                          </ion-col>
+                      </ion-row>
                   </ion-col>
               </ion-row>
+    <!--        -->
+            <ion-row class="ion-justify-content-center" *ngIf="activeBenefice && validerCode">
+                  <ion-col size="10" size-sm="6" size-lg="4">
+                    <ion-item class="ion-margin-bottom">
+                        <ion-label position="">Nom</ion-label>
+                        <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.nom}}</span>
+                    </ion-item>
 
-            </div>
-        </div>
-    </ion-col>
+                    <ion-item class="ion-margin-bottom">
+                        <ion-label position="">Prénom</ion-label>
+                        <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.prenom}}</span>
+                    </ion-item>
 
-</div>
+                    <ion-item class="ion-margin-bottom">
+                        <ion-label position="">Téléphone</ion-label>
+                        <span class="dataClient ion-margin-top" slot="end">{{dataBeneficiaire.phone}}</span>
+                    </ion-item>
+
+                    <!-- Input cni beneficiaire -->
+                    <ion-item lines="full" class=" ion-margin-bottom ion-margin-top">
+                        <ion-label position="floating">N° Identifiant du bénéficiare</ion-label>
+                        <ion-input type="number" max="10" min="1000000" [(ngModel)]="identifiantBeneficiaire" name="identifiantBeneficiaire" class="ion-margin-bottom" required placeholder="saisir l'identifiant du bénéficiaire"></ion-input>
+                    </ion-item>
+                    <ion-col *ngIf="notcni">
+                          <div class="ion-text-center">
+                              <ion-label color="danger">l'idendifiant du bénéficiaire est obligatoire!</ion-label>
+                          </div>
+                    </ion-col>
+                    <ion-col *ngIf="badcni">
+                        <div class="ion-text-center">
+                            <ion-label color="danger">l'idendifiant que vous venez de rentrer est invalide!</ion-label>
+                        </div>
+                    </ion-col>
+
+                    <ion-row class="ion-justify-content-center ion-margin-top ion-margin-bottom">
+                        <ion-col class="ion-margin-bottom"  size="6">
+                            <ion-button color="danger" class="ion-margin-bottom" expand="block"  (click)="cancelRetrait()" >Annuler</ion-button>
+                        </ion-col>
+                       <ion-col class="ion-margin-bottom" size="6" >
+                           <ion-button color="secondary" class="ion-margin-bottom" expand="block" (click)="confirmRetrait()">Confirmer</ion-button>
+                       </ion-col>
+                    </ion-row>
+                 </ion-col>
+              </ion-row>
+          </ion-grid>
+      </form>
+</ion-content>

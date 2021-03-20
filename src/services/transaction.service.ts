@@ -15,8 +15,8 @@ export class TransactionService {
     getRetraitByCode(code: number) {
        return this.httpClient.get(this.urlEnv + '/transaction/' + code);
     }
-    doRetrait(code: number) {
-       return this.httpClient.get(this.urlEnv + '/recupTransaction/' + code);
+    doRetrait(code: number, identifiantBeneficiaire: any) {
+       return this.httpClient.put(this.urlEnv + '/recupTransaction/' + code, identifiantBeneficiaire);
     }
     mesTransactions() {
        return this.httpClient.get(this.urlEnv + '/transactionByUser');

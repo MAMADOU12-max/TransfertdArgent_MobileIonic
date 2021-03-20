@@ -22,6 +22,10 @@ export class RetraitPage implements OnInit {
   dataClient: any;
   dataBeneficiaire: any;
   helper = new JwtHelperService() ;
+  form: FormGroup;
+  identifiantBeneficiaire: any;
+  notcni = false;
+  badcni = false;
 
   constructor(private transactionService: TransactionService, private formBuilder: FormBuilder,
               private loadingController: LoadingController, private authService: AuthService, private alertController: AlertController,
@@ -81,24 +85,35 @@ export class RetraitPage implements OnInit {
          this.errorCode = '';
          this.router.navigate(['/homepage']);
       }
-      async successRetrait(successMessage: any) {
+      async generikAlert(successMessage: any, head: any) {
         const alert = await this.alertController.create({
           cssClass: 'my-custom-class',
-          header: 'Opération reussie!',
+          header: head,
           message: successMessage,
           buttons: ['OK']
         });
         await alert.present();
       }
       async confirmRetrait() {
+          if (this.identifiantBeneficiaire === null || this.identifiantBeneficiaire === undefined) {
+             this.notcni = true;
+             this.generikAlert('Vous devez rentrer le numéro d\'identité du bénéficiaire avant de valider!', 'Erreur');
+             return;
+          } else if (this.identifiantBeneficiaire < 100000 || this.identifiantBeneficiaire > 999999999) {
+                this.badcni = true;
+                this.notcni = false;
+                return;
+          }
+
           const loading = await this.loadingController.create({
             cssClass: 'my-loading',
             message: 'chargement...'
           });
           await loading.present();
           // console.log(this.formCode.value.codeTransaction);
-          this.transactionService.doRetrait(this.formCode.value.codeTransaction).subscribe(data => {
-              this.successRetrait(data);
+        // tslint:disable-next-line:max-line-length
+          this.transactionService.doRetrait(this.formCode.value.codeTransaction, {identifiantBeneficiaire: this.identifiantBeneficiaire}).subscribe(data => {
+              this.generikAlert(data, 'Opération reussie!');
               this.formCode.reset();
               this.errorCode = '';
               this.validerCode = false;

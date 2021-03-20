@@ -1,131 +1,110 @@
-<ion-content >
-   <ion-grid class="contain">
-<!--    <ion-row id="header" class="ion-justify-content-around ion-margin-top">-->
-<!--        <ion-col size="2" class="ion-margin-top">-->
-<!--          <div routerLink="/menu">-->
-<!--            <ion-icon name="menu"  size="large"></ion-icon>-->
-<!--          </div>-->
-<!--        </ion-col>-->
-<!--        <ion-col size="3" class="">-->
-<!--          <div>-->
-<!--            <ion-img src="assets/icon/logo.png"></ion-img>-->
-<!--          </div>-->
-<!--        </ion-col>-->
-<!--        <ion-col size="2" class="ion-margin-top">-->
-<!--          <div *ngIf="photoExist">-->
-<!--            <img src="data:image/jpeg;base64,{{dataUser.avatar}}" alt="avatar" class="avatar">-->
+<ion-content>
+    <ion-grid>
+        <!--  Menu-->
+        <app-menu></app-menu>
 
-<!--          </div>-->
-<!--          <div *ngIf="!photoExist">-->
-<!--            <img src="assets/images/avatar.jpeg" alt="avatar" class="avatar">-->
-<!--          </div>-->
-<!--        </ion-col>-->
-<!--      </ion-row>-->
-<!--     <ion-row id="header" class="ion-justify-content-around ion-margin-top">-->
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-sm="10" size-md="8" size-lg="6">
+                <ion-card class="">
+                    <ion-card-header>
+                        <ion-card-subtitle class="solde">Mon solde disponible</ion-card-subtitle>
+                        <ion-card-title class="price-ensemble">
 
-         <app-menu></app-menu>
-<!--     </ion-row>-->
-  </ion-grid>
+                            <ion-card-title class="price">
+                                <ion-card-title class="price-pr">{{compte?.solde}}</ion-card-title>
+                                <ion-card-title class="price-fr">FCFA</ion-card-title>
+                            </ion-card-title>
 
-  <ion-grid class="ion-margin-top">
-    <ion-row class="ion-margin-top" >
-      <ion-col size="12">
-        <ion-card class="ion-margin-top">
-          <ion-card-header>
-            <ion-card-subtitle class="solde">Mon solde disponible</ion-card-subtitle>
-            <ion-card-title class="price-ensemble">
+                            <ion-card-title class="eye">
+                                 <ion-icon name="eye-outline"></ion-icon>
+                            </ion-card-title>
 
-              <ion-card-title class="price">
-                <ion-card-title class="price-pr">{{compte?.solde}}</ion-card-title>
-                <ion-card-title class="price-fr">FCFA</ion-card-title>
-              </ion-card-title>
+                        </ion-card-title>
+                        <ion-card-subtitle class="date">Mise à jour le {{compte?.miseajour}}</ion-card-subtitle>
+                    </ion-card-header>
+                </ion-card>
+            </ion-col>
+        </ion-row>
 
-              <ion-card-title class="eye">
-                <ion-icon name="eye-outline"></ion-icon>
-              </ion-card-title>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="10" size-md="6">
 
-            </ion-card-title>
-            <ion-card-subtitle class="date">Mise à jour le {{compte?.miseajour}}</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+                <ion-list class="home-list">
+                    <ion-item routerLink="/tabs/depot" *ngIf="useragence">
+                        <ion-icon slot="start"  src="assets/icon/depot.svg" class="component-icon component-icon-primary"></ion-icon>
+                        <ion-label>Depot</ion-label>
+                    </ion-item>
 
-    <ion-row>
-      <ion-col size="11">
+                    <ion-item routerLink="/tabs/retrait" *ngIf="useragence">
+                        <ion-icon slot="start"  src="assets/icon/retrait.svg" class="component-icon component-icon-primary"></ion-icon>
+                        <ion-label>Retrait</ion-label>
+                    </ion-item>
 
-        <ion-list class="home-list">
-          <ion-item routerLink="/tabs/depot" *ngIf="useragence">
-            <ion-icon slot="start"  src="assets/icon/depot.svg" class="component-icon component-icon-primary"></ion-icon>
-            <ion-label>Depot</ion-label>
-          </ion-item>
+                    <ion-item routerLink="/tabs/depot-compte" *ngIf="caissier">
+                        <ion-icon slot="start" name="cube-outline"></ion-icon>
+                        <ion-label>Dépôt</ion-label>
+                    </ion-item>
 
-          <ion-item routerLink="/tabs/retrait" *ngIf="useragence">
-            <ion-icon slot="start"  src="assets/icon/retrait.svg" class="component-icon component-icon-primary"></ion-icon>
-            <ion-label>Retrait</ion-label>
-          </ion-item>
+                    <ion-item routerLink="/tabs/mes-transactions" *ngIf="useragence">
+                        <ion-icon slot="start" src="assets/icon/transaction.svg" class="component-icon component-icon-primary"></ion-icon>
+                        <ion-label>Mes transactions</ion-label>
+                    </ion-item>
 
-          <ion-item routerLink="/tabs/depot-compte" *ngIf="caissier">
-            <ion-icon slot="start" name="cube-outline"></ion-icon>
-            <ion-label>Dépôt</ion-label>
-          </ion-item>
+                    <ion-item routerLink="/tabs/toutesles-transactions" *ngIf="useragence || caissier || adminagence">
+                        <ion-icon slot="start"  src="assets/icon/all-transaction.svg" class="component-icon component-icon-primary"></ion-icon>
+                        <ion-label>Toutes les transactions</ion-label>
+                    </ion-item>
 
-          <ion-item routerLink="/tabs/mes-transactions" *ngIf="useragence">
-              <ion-icon slot="start" src="assets/icon/transaction.svg" class="component-icon component-icon-primary"></ion-icon>
-              <ion-label>Mes transactions</ion-label>
-          </ion-item>
+                    <ion-item *ngIf="adminSystem || adminagence" routerLink="/tabs/add-user">
+                        <ion-icon slot="start" name="person-add-outline"></ion-icon>
+                        <ion-label title="ajouter un utilisateur">Nouveau utilisateur</ion-label>
+                    </ion-item>
 
-          <ion-item routerLink="/tabs/toutesles-transactions" *ngIf="useragence || caissier || adminagence">
-              <ion-icon slot="start"  src="assets/icon/all-transaction.svg" class="component-icon component-icon-primary"></ion-icon>
-              <ion-label>Toutes les transactions</ion-label>
-          </ion-item>
+                    <ion-item *ngIf="adminSystem || adminagence" routerLink="/tabs/list-user">
+                        <ion-icon slot="start" name="people-circle-outline"></ion-icon>
+                        <ion-label>Liste utilisateurs</ion-label>
+                    </ion-item>
 
-          <ion-item *ngIf="adminSystem || adminagence" routerLink="/tabs/add-user">
-              <ion-icon slot="start" name="person-add-outline"></ion-icon>
-              <ion-label title="ajouter un utilisateur">Ajouter un utilisateur</ion-label>
-          </ion-item>
+                    <ion-item routerLink="/tabs/mes-commissions" *ngIf="adminSystem">
+                        <ion-icon slot="start"  src="assets/icon/commis.svg" class="component-icon component-icon-primary"></ion-icon>
+                        <ion-label>Mes commissions</ion-label>
+                    </ion-item>
 
-          <ion-item *ngIf="adminSystem || adminagence">
-              <ion-icon slot="start" name="people-circle-outline"></ion-icon>
-              <ion-label>Lister les utilisateurs</ion-label>
-          </ion-item>
+                    <ion-item routerLink="/tabs/calculator" *ngIf="useragence || caissier">
+                        <ion-icon slot="start"  src="assets/icon/calculator.svg" class="component-icon component-icon-primary"></ion-icon>
+                        <ion-label>Calculateur de frais</ion-label>
+                    </ion-item>
 
-          <ion-item routerLink="/tabs/mes-commissions" *ngIf="adminSystem">
-            <ion-icon slot="start"  src="assets/icon/commis.svg" class="component-icon component-icon-primary"></ion-icon>
-            <ion-label>Mes commissions</ion-label>
-          </ion-item>
+                    <ion-item *ngIf="adminSystem">
+                        <ion-icon slot="start" name="settings" class="component-icon component-icon-primary"></ion-icon>
+                        <ion-label>Paramètres</ion-label>
+                    </ion-item>
 
-          <ion-item routerLink="/tabs/calculator">
-            <ion-icon slot="start"  src="assets/icon/calculator.svg" class="component-icon component-icon-primary"></ion-icon>
-            <ion-label>Calculateur de frais</ion-label>
-          </ion-item>
+                    <ion-item (click)="disconnect()"  class="">
+                        <ion-icon slot="start"  src="assets/icon/exit.svg" class="component-icon component-icon-primary"></ion-icon>
+                        <ion-label>Deconnexion</ion-label>
+                    </ion-item>
+                </ion-list>
 
-            <ion-item (click)="disconnect()"  class="">
-                <ion-icon slot="start"  src="assets/icon/exit.svg" class="component-icon component-icon-primary"></ion-icon>
-                <ion-label>Deconnexion</ion-label>
-            </ion-item>
-        </ion-list>
-
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
 
-  <ion-tab-bar slot="bottom">
-    <ion-tab-button routerLink="/homepage">
-      <ion-icon src="assets/icon/home.svg"></ion-icon>
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button routerLink="/homepage">
+        <ion-icon src="assets/icon/home.svg"></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button>
-      <ion-icon name="refresh"></ion-icon>
+        <ion-icon name="refresh"></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button routerLink="/tabs/tab3">
-      <ion-icon name="barcode"></ion-icon>
+        <ion-icon name="barcode"></ion-icon>
     </ion-tab-button>
 
     <ion-tab-button routerLink="/tabs/calculator">
       <ion-icon src="assets/icon/calculator.svg"></ion-icon>
-    </ion-tab-button>
+      </ion-tab-button>
   </ion-tab-bar>
