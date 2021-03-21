@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AlertController} from '@ionic/angular';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {TransactionService} from '../../services/transaction.service';
+import {TransactionService} from '../../../services/transaction.service';
 import {Router} from '@angular/router';
-import {AuthService} from '../../services/auth.service';
-import {FraisService} from '../../services/frais.service';
+import {AuthService} from '../../../services/auth.service';
+import {FraisService} from '../../../services/frais.service';
 
 @Component({
   selector: 'app-depot',

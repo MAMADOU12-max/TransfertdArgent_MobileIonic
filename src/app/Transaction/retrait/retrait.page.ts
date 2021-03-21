@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {TransactionService} from '../../services/transaction.service';
+import {TransactionService} from '../../../services/transaction.service';
 import {AbstractControl, FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {AlertController, LoadingController} from '@ionic/angular';
 import {JwtHelperService} from '@auth0/angular-jwt';
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../../services/auth.service';
 import {Router} from '@angular/router';
 
 @Component({

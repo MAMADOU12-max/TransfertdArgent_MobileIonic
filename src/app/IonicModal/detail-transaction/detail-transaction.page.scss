@@ -1,0 +1,30 @@
+ion-content {
+  background-color: white;
+  --offset-bottom: auto!important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.dataClient {
+  //margin-top: 82px;
+  //margin-left: 70px;
+  font-weight: bold;
+  color: #87c4e2;
+  //display: flex;
+}
+.key{
+  padding-left: 22px;
+  font-size: 1em;
+  font-family: Arial;
+}
+ion-card-header{
+
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+ion-card-subtitle{
+  font-size: 1.2em;
+}

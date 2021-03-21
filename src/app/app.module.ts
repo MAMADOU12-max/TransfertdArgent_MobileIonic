@@ -6,12 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {Interceptor} from '../interceptor/interceptor';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,  SweetAlert2Module.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, NgxPaginationModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },   {
     provide: HTTP_INTERCEPTORS,
     useClass: Interceptor,

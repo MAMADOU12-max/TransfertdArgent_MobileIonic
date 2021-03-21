@@ -1,0 +1,77 @@
+// ----------------------------------------- HEADER --------------------------------------------- //
+ion-card-header{
+  padding: 0;
+}
+// -------------------------------------------- ## ------------------------------------------------- //
+
+ion-card-content{
+  padding: 25px 70px;
+  padding-bottom: 0;
+  padding: 0;
+  scroll-padding-right: 1px;
+}
+.aboveDepot{
+  border-bottom: rgb(133, 191, 224) solid 4px;
+  //font-size: 0.3em;
+}
+.toute{
+  font-size: 0.8em;
+}
+.iconmenu{
+  zoom:1.5;
+  padding-right: 5px
+}
+ion-content {
+  background-color: white;
+  --offset-bottom: auto!important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+//------------------------------------------------ ## ----------------------------------------------//
+
+header {
+  font-family: 'Lobster', cursive;
+  text-align: center;
+  font-size: 25px;
+}
+
+
+// -------------------------------------------- ### ----------------------------------------- //
+
+.dataClient {
+  margin-top: 32px;
+  //margin-left: 70px;
+  font-weight: bold;
+  color: #87c4e2;
+}
+.header-row{
+  font-weight: 500;
+  border-bottom: 2px solid black;
+}
+.data-row{
+  border-bottom: 1px solid black;
+  margin: 12px 0;
+}
+
+
+// ------------------------------------------- ### ----------------------------------------- //
+
+@media screen and (min-width: 300px){
+  .aboveDepot{
+    font-size: 1.4em;
+  }
+  #error{
+    font-size: 1.3em;
+  }
+}
+@media screen and (min-width: 500px){
+  .toute{
+    font-size: 1.4em;
+  }
+  .iconmenu{
+    zoom: 1.8;
+  }
+}

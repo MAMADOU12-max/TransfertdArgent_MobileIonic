@@ -1,72 +1,133 @@
-<div>
-  <ion-header translucent={true}>
-    <ion-toolbar>
-      <ion-card class="ion-justify-content-center header">
-        <ion-card-header>
-          <ion-grid>
-            <ion-row class="ion-justify-content-center">
-              <ion-col size-lg="1" size-md="1" size-sm="3" size="5">
-                <div>
-                  <img src="assets/icon/logo.png"/>
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-header>
-        <ion-card-content class="ion-align-items-center">
-          <ion-grid>
-            <ion-row class="ion-justify-content-center">
-              <ion-col size="5" size-sm="3" offset-sm="1" offset-md="2">
-                <div class="aboveDepot">
-                  <ion-icon id="depotIcon" name="cube-outline" alt="depot" ></ion-icon>Dépôt
-                </div>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-card-content>
-      </ion-card>
-    </ion-toolbar>
-
-    <ion-toolbar >
-      <!--       -->
-      <ion-col id="choice" size="12">
-        <ion-segment (ionChange)="segmentChanged($event)">
-          <ion-segment-button value="liste">
-            <ion-label>Liste</ion-label>
-          </ion-segment-button>
-          <ion-segment-button value="nouveau">
-            <ion-label>Nouveau</ion-label>
-          </ion-segment-button>
-        </ion-segment>
-      </ion-col>
-    </ion-toolbar>
-  </ion-header>
-
-  <ion-col class="wrapper" *ngIf="activeListe" >
-    <!--      *ngIf="activeEmetteur && validerCode"-->
-    <div class="scrollbar style-3">
-      <div class="force-overflow">
-          lorem300
-
-      </div>
-    </div>
-  </ion-col>
-
-  <ion-grid *ngIf="activeNouveau">
-      <!--           Form Validate Code -->
-      <ion-row class="ion-justify-content-center">
-          <ion-col size="10" >
-              <ion-label id="labelCode" class="ion-justify-content-center">Montant</ion-label>
-              <form id="form" [formGroup]="formMontant">
-                  <ion-item class="ion-margin-bottom itemCode">
-                      <ion-input type="number" formControlName="montantDeDepot" class="inputCode" placeholder="Entrez le montant" ></ion-input>
-                  </ion-item>
-                  <ion-label  id="error">{{errorMessage}}</ion-label>
-                  <br>
-                  <ion-button expand="block" class="validerButton" [disabled]="formMontant.invalid" color="secondary" shape="round" (click)="deposer()">Déposer</ion-button>
-              </form>
+<ion-header translucent={true}>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="12" size-sm="10" size-md="8">
+      <ion-toolbar>
+        <ion-card class="ion-justify-content-center header">
+          <ion-card-header>
+            <ion-grid>
+              <ion-row class="ion-justify-content-center">
+                <ion-col size-sm="3" offset-sm="1" size="5" offset-lg="1">
+                  <div>
+                    <img src="../../../assets/icon/logo.png"/>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-header>
+          <ion-card-content class="ion-align-items-center">
+            <ion-grid>
+              <ion-row class="ion-justify-content-center">
+                <ion-col size-sm="2" size="4" size-md="1">
+                  <div class="aboveDepot">
+                    <ion-icon id="depotIcon" name="cube-outline" alt="depot" ></ion-icon>Dépôt
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-toolbar>
+      <ion-toolbar >
+        <!--       -->
+          <ion-col id="choice" size="12">
+              <ion-segment (ionChange)="segmentChanged($event)">
+                  <ion-segment-button value="liste">
+                       <ion-label>Liste</ion-label>
+                  </ion-segment-button>
+                  <ion-segment-button value="nouveau">
+                        <ion-label>Nouveau</ion-label>
+                  </ion-segment-button>
+              </ion-segment>
           </ion-col>
-      </ion-row>
-  </ion-grid>
+      </ion-toolbar>
+    </ion-col>
+  </ion-row>
+</ion-header>
 
-</div>
+<ion-content>
+    <ion-grid *ngIf="activeListe">
+      <!--      *ngIf="activeEmetteur && validerCode"-->
+
+          <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-sm="8" size-md="6" >
+              <ion-row class=" header-row">
+                <ion-col tappable  size="4">
+                  <div>Date
+<!--                    <ion-icon name="arrow-down" *ngIf="sortDate"></ion-icon>-->
+<!--                    <ion-icon name="arrow-up" *ngIf="!sortDate"></ion-icon>-->
+                  </div>
+
+                </ion-col>
+                <!--                    <ion-col (click)="sortBy('user')" size="2">-->
+                <!--                        <div>User-->
+                <!--                            <ion-icon name="arrow-down" *ngIf="sortUser"></ion-icon>-->
+                <!--                            <ion-icon name="arrow-up" *ngIf="!sortUser"></ion-icon>-->
+                <!--                        </div>-->
+                <!--                    </ion-col>-->
+<!--                <ion-col size="3">-->
+<!--                  <div>Type-->
+<!--&lt;!&ndash;                    <ion-icon name="arrow-down" *ngIf="sortType"></ion-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <ion-icon name="arrow-up" *ngIf="!sortType"></ion-icon>&ndash;&gt;-->
+<!--                  </div>-->
+<!--                </ion-col>-->
+                <ion-col size="4">
+                  <div>Montant
+<!--                    <ion-icon name="arrow-down" *ngIf="sortMontant"></ion-icon>-->
+<!--                    <ion-icon name="arrow-up" *ngIf="!sortMontant"></ion-icon>-->
+                  </div>
+                </ion-col>
+                <ion-col  size="4">
+                  <div> Action
+                    <!--                            <ion-icon name="arrow-down" *ngIf="sortFrais"></ion-icon>-->
+                    <!--                            <ion-icon name="arrow-up" *ngIf="!sortFrais"></ion-icon>-->
+                  </div>
+                </ion-col>
+              </ion-row>
+              <ion-row  *ngFor="let depot of alldepot">
+<!--                *ngFor="let transaction of alltransactions | paginate: { id: 'foo',-->
+<!--                                                            itemsPerPage: 7,-->
+<!--                                                            currentPage: page,-->
+<!--                                                            totalItems: totalUsers }" class="data-row" tappable (click)="rowselect(transaction.codeTransaction)"-->
+                <ion-col size="4">
+                    <div>{{depot?.dateDepot | date: 'shortDate'}}</div>
+                </ion-col>
+                <!--                      <ion-col size="1">-->
+                <!--                          <div>{{transaction?.user}}</div>-->
+                <!--                      </ion-col>-->
+                <ion-col size="4">
+                    <div>{{depot?.montantDeDepot}}</div>
+                </ion-col>
+                <ion-col size="4">
+<!--                  <div>{{transaction?.montant}}</div>-->
+                  Lorem ipsum dolor sit.
+                </ion-col>
+              </ion-row>
+
+<!--              <ion-row>-->
+<!--                <pagination-controls id="foo" (pageChange)="page = $event"></pagination-controls>-->
+<!--              </ion-row>-->
+            </ion-col>
+          </ion-row>
+
+
+    </ion-grid>
+
+    <ion-grid *ngIf="activeNouveau">
+        <!--           Form Validate Code -->
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="10" size-sm="6" size-lg="4">
+                <ion-label id="labelCode" class="ion-justify-content-center">Montant</ion-label>
+                <form id="form" [formGroup]="formMontant">
+                    <ion-item class="ion-margin-bottom itemCode">
+                        <ion-input type="number" formControlName="montantDeDepot" class="inputCode" placeholder="Entrez le montant" ></ion-input>
+                    </ion-item>
+                    <ion-label  id="error">{{errorMessage}}</ion-label>
+                    <br>
+                    <ion-button expand="block" class="validerButton" [disabled]="formMontant.invalid" color="secondary" shape="round" (click)="deposer()">Déposer</ion-button>
+                </form>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+</ion-content>
+

@@ -1,0 +1,122 @@
+<ion-header translucent={true}>
+    <ion-row class="ion-justify-content-center">
+        <ion-col size="12" size-sm="10" size-md="8">
+            <ion-toolbar>
+              <ion-card class="ion-justify-content-center header">
+                <ion-card-header>
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-col size-lg="1" size-md="1" size-sm="3" size="5">
+                        <div>
+                          <img src="../../../assets/icon/logo.png"/>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+                <ion-card-content class="ion-align-items-center">
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-col style="display: flex; justify-content: center" size="12">
+                        <div class="aboveDepot">
+                          <ion-icon id="depotIcon" src="assets/icon/all-transaction.svg" alt="alltransaction" ></ion-icon>
+                           <span class="toute">Toutes les transactions</span>
+                        </div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+
+                </ion-card-content>
+              </ion-card>
+            </ion-toolbar>
+            <ion-toolbar>
+                <ion-grid>
+                    <ion-row tappable>
+                       <ion-col>
+                           <ion-buttons>
+                             <ion-icon class="iconmenu" name="apps" (click)="completeAction()"></ion-icon>
+                           </ion-buttons>
+                       </ion-col>
+                    </ion-row>
+                    <ion-row *ngIf="action">
+<!--                        <ion-col col-2></ion-col>-->
+                        <ion-col col-10 style="display: flex; justify-content: center;height:45px">
+                            <input type="text" placeholder="rechercher une transaction par code"  [(ngModel)]="search">
+                            <ion-icon name="search-circle-outline" style="zoom: 2" (click)="togeDetailtransaction()"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-toolbar>
+        </ion-col>
+    </ion-row>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+            <ion-col size="12" size-sm="8" size-md="6" >
+                <ion-row class=" header-row">
+                    <ion-col tappable (click)="sortBy('date')" size="3">
+                        <div>Date
+                          <ion-icon name="arrow-down" *ngIf="sortDate"></ion-icon>
+                          <ion-icon name="arrow-up" *ngIf="!sortDate"></ion-icon>
+                        </div>
+
+                    </ion-col>
+<!--                    <ion-col (click)="sortBy('user')" size="2">-->
+<!--                        <div>User-->
+<!--                            <ion-icon name="arrow-down" *ngIf="sortUser"></ion-icon>-->
+<!--                            <ion-icon name="arrow-up" *ngIf="!sortUser"></ion-icon>-->
+<!--                        </div>-->
+<!--                    </ion-col>-->
+                    <ion-col (click)="sortBy('type')" size="3">
+                        <div>Type
+                            <ion-icon name="arrow-down" *ngIf="sortType"></ion-icon>
+                            <ion-icon name="arrow-up" *ngIf="!sortType"></ion-icon>
+                        </div>
+                    </ion-col>
+                    <ion-col (click)="sortBy('montant')" size="4">
+                        <div>Montant
+                            <ion-icon name="arrow-down" *ngIf="sortMontant"></ion-icon>
+                            <ion-icon name="arrow-up" *ngIf="!sortMontant"></ion-icon>
+                        </div>
+                    </ion-col>
+                    <ion-col (click)="sortBy('frais')" size="2">
+                        <div>Frais
+<!--                            <ion-icon name="arrow-down" *ngIf="sortFrais"></ion-icon>-->
+<!--                            <ion-icon name="arrow-up" *ngIf="!sortFrais"></ion-icon>-->
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row  *ngFor="let transaction of alltransactions | paginate: { id: 'foo',
+                                                      itemsPerPage: 7,
+                                                      currentPage: page,
+                                                      totalItems: totalUsers }" class="data-row" tappable (click)="rowselect(transaction.codeTransaction)">
+
+                      <ion-col size="3">
+                          <div>{{transaction?.datetransaction | date: 'shortDate'}}</div>
+                      </ion-col>
+<!--                      <ion-col size="1">-->
+<!--                          <div>{{transaction?.user}}</div>-->
+<!--                      </ion-col>-->
+                      <ion-col size="3">
+                          <div>{{transaction?.type}}</div>
+                      </ion-col>
+                      <ion-col size="4">
+                         <div>{{transaction?.montant}}</div>
+                      </ion-col>
+                      <ion-col size="2">
+                         <div>{{transaction?.frais}}</div>
+                      </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <pagination-controls id="foo" (pageChange)="page = $event"></pagination-controls>
+                </ion-row>
+            </ion-col>
+         </ion-row>
+    </ion-grid>
+</ion-content>
+
+
+

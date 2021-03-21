@@ -1,0 +1,188 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title>Transaction</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismissModal()">Close</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row class="ion-justify-content-center">
+          <ion-col size="12">
+              <ion-card>
+                  <img src="assets/images/transfermoney.png" class="avatar"  />
+                  <ion-card-header>
+                      <ion-card-subtitle>Information transaction</ion-card-subtitle>
+                  </ion-card-header>
+                  <ion-card-content>
+
+                      <span class="key">Numèro de la transaction</span>
+                      <ion-item class="ion-margin-bottom">
+                          <span class="dataClient" slot="end">{{transactionData.id}}</span>
+                      </ion-item>
+
+                      <span class="key">Code de la transaction</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData.codeTransaction}}</span>
+                      </ion-item>
+
+                      <span class="key">Etat de la transaction</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData.etat}}</span>
+                      </ion-item>
+
+                      <span class="key">Montant de la transaction</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData.montant}}</span>
+                      </ion-item>
+
+                      <span class="key">Frais de la transaction</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData?.TTC}}</span>
+                      </ion-item>
+
+                      <span class="key">Frais d'envoie'</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData?.fraisEnvoie}}</span>
+                      </ion-item>
+
+                      <span class="key">Frais de retrait</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData?.fraisRetrait}}</span>
+                      </ion-item>
+
+                      <span class="key">Frais du système</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData?.fraisSystem}}</span>
+                      </ion-item>
+
+                      <span class="key">N° compte expéditeur</span>
+                      <ion-item class="ion-margin-bottom">
+                          <span class="dataClient" slot="end">{{transactionData?.compteEnvoie | slice:-1}}</span>
+                      </ion-item>
+
+                      <span class="key">N° utilisateur expéditeur</span>
+                      <ion-item class="ion-margin-bottom">
+                          <span class="dataClient" slot="end">{{transactionData?.deposerUser | slice:-1}}</span>
+                      </ion-item>
+
+                      <span class="key">N° compte récepteur</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData?.compteRetrait | slice:-1}}</span>
+                      </ion-item>
+
+                      <span class="key">N° utilisateur récepteur</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData?.retraitUser | slice:-1}}</span>
+                      </ion-item>
+
+                      <span class="key">Date du dépôt</span>
+                      <ion-item class="ion-margin-bottom">
+                          <span class="dataClient" slot="end">{{transactionData?.dateDepot | date: 'short'}}</span>
+                      </ion-item>
+
+                      <span class="key">Date de retrait</span>
+                      <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{transactionData?.dateRetrait | date: 'short'}}</span>
+                      </ion-item>
+
+                      <span class="key">Date d'annulation</span>
+                      <ion-item class="ion-margin-bottom">
+                          <span class="dataClient" slot="end">{{transactionData?.dateAnnulation | date: 'short'}}</span>
+                      </ion-item>
+
+                 </ion-card-content>
+            </ion-card>
+
+            <!--    emetteur  -->
+            <ion-card>
+                <img src="assets/images/depotmoney.png" class="avatar" />
+                <ion-card-header>
+<!--                      <ion-card-title>Information Emetteur</ion-card-title>-->
+                  <ion-card-subtitle>Information Emetteur</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content>
+
+                    <span class="key">Numèro de l'emetteur</span>
+                    <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{emetteurData?.id}}</span>
+                    </ion-item>
+
+                    <span class="key">N° carte d'identité</span>
+                    <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{emetteurData?.identityNumber}}</span>
+                    </ion-item>
+
+                    <span class="key">Nom</span>
+                    <ion-item class="ion-margin-bottom">
+                       <span class="dataClient" slot="end">{{emetteurData?.nom}}</span>
+                    </ion-item>
+
+                    <span class="key">Prénom</span>
+                    <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{emetteurData?.prenom}}</span>
+                    </ion-item>
+
+                    <span class="key">Numéro téléphone</span>
+                    <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{emetteurData?.phone}}</span>
+                    </ion-item>
+
+                </ion-card-content>
+            </ion-card>
+
+            <!--    beneficiaire  -->
+            <ion-card>
+                <img src="assets/images/retraitmoney.png" class="avatar" />
+                <ion-card-header>
+<!--                  <ion-card-title>Information Bénéficaire</ion-card-title>-->
+                    <ion-card-subtitle>Information Bénéficaire</ion-card-subtitle>
+                </ion-card-header>
+                <ion-card-content>
+
+                    <span class="key">Numèro de l'emetteur</span>
+                    <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{beneficiaireData.id}}</span>
+                    </ion-item>
+
+                    <span class="key">N° carte d'identité</span>
+                    <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{beneficiaireData.identityNumber}}</span>
+                    </ion-item>
+
+                    <span class="key">Nom</span>
+                    <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{beneficiaireData?.nom}}</span>
+                    </ion-item>
+
+                    <span class="key">Prénom</span>
+                    <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{beneficiaireData?.prenom}}</span>
+                    </ion-item>
+
+                    <span class="key">Numéro téléphone</span>
+                    <ion-item class="ion-margin-bottom">
+                        <span class="dataClient" slot="end">{{beneficiaireData?.phone}}</span>
+                    </ion-item>
+
+                    <ion-row class="ion-justify-content-center ion-margin-top ion-margin-bottom">
+                      <!--                        <ion-col class="ion-margin-bottom"  size="12">-->
+                      <!--                            <ion-button color="danger" class="ion-margin-bottom" expand="block" >Modifier la transaction</ion-button>-->
+                      <!--                        </ion-col>-->
+                      <ion-col class="ion-margin-bottom" size="12" *ngIf="etat == 'Encours'">
+                        <ion-button color="danger" class="ion-margin-bottom" expand="block" (click)="annulerTransaction()">Annuler la transaction</ion-button>
+                      </ion-col>
+                      <ion-col class="ion-margin-bottom" size="12" *ngIf="etat !== 'Encours'">
+                        <ion-button routerLink="/homepage" color="secondary" class="ion-margin-bottom" expand="block">Page d'acceuil</ion-button>
+                      </ion-col>
+                    </ion-row>
+
+                </ion-card-content>
+            </ion-card>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

@@ -13,4 +13,7 @@ export class DepotService {
   depot(montantDeDepot: number) {
      return this.httpClient.post(this.urlEnv + '/depot', montantDeDepot );
   }
+  listDepot() {
+     return this.httpClient.get(this.urlEnv + '/caissiers?Archivage=0');
+  }
 }

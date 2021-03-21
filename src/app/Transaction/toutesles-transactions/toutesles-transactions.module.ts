@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TouteslesTransactionsPageRoutingModule } from './toutesles-transactions-routing.module';
 
 import { TouteslesTransactionsPage } from './toutesles-transactions.page';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TouteslesTransactionsPageRoutingModule
+    TouteslesTransactionsPageRoutingModule,
+    NgxPaginationModule
   ],
   declarations: [TouteslesTransactionsPage]
 })

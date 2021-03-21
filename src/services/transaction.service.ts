@@ -24,4 +24,13 @@ export class TransactionService {
     touteslesTransactions() {
        return this.httpClient.get(this.urlEnv + '/transactionByCompte');
     }
+    transactions() {
+       return this.httpClient.get(this.urlEnv + '/transactions');
+    }
+    getNocontroltransaction(code: number) {
+        return this.httpClient.get(this.urlEnv + '/getdirecttransaction/' + code);
+    }
+    annulerTransaction(code: number) {
+       return this.httpClient.get(this.urlEnv + '/transaction/' + code + '/annuler');
+    }
 }
