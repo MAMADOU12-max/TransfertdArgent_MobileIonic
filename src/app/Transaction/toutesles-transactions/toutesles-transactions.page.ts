@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {TransactionService} from '../../../services/transaction.service';
-import {ModalController} from '@ionic/angular';
+import {LoadingController, ModalController} from '@ionic/angular';
 import {DetailTransactionPage} from '../../IonicModal/detail-transaction/detail-transaction.page';
 
 @Component({
@@ -10,7 +10,8 @@ import {DetailTransactionPage} from '../../IonicModal/detail-transaction/detail-
 })
 export class TouteslesTransactionsPage implements OnInit {
 
-  constructor(private transactionService: TransactionService, public modalController: ModalController) { }
+  constructor(private transactionService: TransactionService, public modalController: ModalController,
+              private loadingController: LoadingController) { }
 
   datapassed: any;
   alltransactions: any;
@@ -33,11 +34,21 @@ export class TouteslesTransactionsPage implements OnInit {
   reverse = false;
 
   ngOnInit() {
-      this.transactionService.touteslesTransactions().subscribe(data => {
-          this.alltransactions = data;
-          this.totalUsers = this.alltransactions.length ;
-          // console.log(this.alltransactions);
-      });
+        this.listTransactions();
+  }
+
+  async listTransactions() {
+    const loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'chargement ...'
+    });
+    await loading.present();
+    this.transactionService.touteslesTransactions().subscribe(data => {
+      this.alltransactions = data;
+      loading.dismiss();
+      this.totalUsers = this.alltransactions.length ;
+      // console.log(this.alltransactions);
+    });
   }
 
   completeAction(){ this.action = !this.action; }
@@ -137,22 +148,36 @@ export class TouteslesTransactionsPage implements OnInit {
   }
 
     // search function
-     togeDetailtransaction(){
-        this.transactionService.getNocontroltransaction(this.search ).subscribe( data => {
-            this.transaction = data;
-            this.presentModal(this.transaction);
-            // console.log(data);
-        }, error => {
-            console.log(error);
-        });
+     async togeDetailtransaction(){
+         const loading = await this.loadingController.create({
+           cssClass: 'my-custom-class',
+           message: 'chargement ...'
+         });
+         await loading.present();
+         this.transactionService.getNocontroltransaction(this.search ).subscribe( data => {
+              this.transaction = data;
+              this.presentModal(this.transaction);
+              loading.dismiss();
+              // console.log(data);
+          }, error => {
+              console.log(error);
+              loading.dismiss();
+          });
     }
-    rowselect(code: number) {
+    async rowselect(code: number) {
+        const loading = await this.loadingController.create({
+          cssClass: 'my-custom-class',
+          message: 'chargement ...'
+        });
+        await loading.present();
         this.transactionService.getNocontroltransaction(code).subscribe( data => {
           this.transaction = data;
           this.presentModal(this.transaction);
+          loading.dismiss();
           // console.log(data);
         }, error => {
           console.log(error);
+          loading.dismiss();
         });
     }
 

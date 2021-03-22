@@ -18,6 +18,9 @@ export class DepotComptePage implements OnInit {
   montantDeDepot: AbstractControl;
   errorMessage: string;
   alldepot: any;
+  // pagination
+  page: number | undefined = 1;
+  totalDepots: number | undefined;
 
   constructor(private formBuilder: FormBuilder, private depotService: DepotService, private authService: AuthService,
               private alertController: AlertController, private router: Router, private loadingController: LoadingController) { }
@@ -27,13 +30,28 @@ export class DepotComptePage implements OnInit {
         montantDeDepot: ['', [Validators.required]]
       });
       this.montantDeDepot = this.formMontant.controls.montantDeDepot;
+
+      this.depotService.refresNeeded$.subscribe(() => {
+          this.listDepot();
+      });
       this.listDepot();
     }
 
-    listDepot() {
-        this.depotService.listDepot().subscribe(data => {
+    async listDepot() {
+        const loading = await this.loadingController.create({
+          cssClass: 'my-custom-class',
+          message: 'chargement ...'
+        });
+        await loading.present();
+        this.depotService.listDepot().subscribe(async data => {
            this.alldepot = data;
-           console.log(this.alldepot);
+           this.totalDepots = this.alldepot.length;
+           await loading.dismiss();
+           // console.log(this.alldepot);
+           // this.lenghtdata = this.alldepot.length;
+           // console.log(this.lenghtdata);
+        }, async error => {
+           await loading.dismiss();
         });
     }
 
@@ -47,10 +65,10 @@ export class DepotComptePage implements OnInit {
       }
     }
 
-    async successDepot(successMessage: any) {
+    async successDepot(successMessage: any, appreciation: string) {
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
-        header: 'Opération reussie!',
+        header: appreciation,
         message: successMessage,
         buttons: ['OK']
       });
@@ -62,8 +80,8 @@ export class DepotComptePage implements OnInit {
           cssClass: 'my-custom-class',
           message: 'depot encours ...'
         });
-        await loading.present();
-        console.log(this.formMontant.value);
+
+        // console.log(this.formMontant.value);
         if (this.formMontant.value.montantDeDepot < 0) {
             this.errorMessage = 'Le montant ne peut pas être négatif!';
             return;
@@ -71,14 +89,59 @@ export class DepotComptePage implements OnInit {
             this.errorMessage = 'Le montant ne peut pas être null';
             return;
         }
+        await loading.present();
         this.depotService.depot(this.formMontant.value).subscribe(data => {
-           this.successDepot(data);
-           this.router.navigate(['homepage']);
            loading.dismiss();
+           this.successDepot(data, 'Opération reussie!');
+           this.router.navigate(['homepage']);
            this.formMontant.reset();
         }, error => {
             console.log(error);
             loading.dismiss();
         });
     }
+
+  async annulerDepot() {
+
+    // const loading = await this.loadingController.create({
+    //   cssClass: 'my-custom-class',
+    //   message: 'annulation encours ...'
+    // });
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirmation',
+      message: 'Etes vous sûr de vouloir annuler ce dépôt?',
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Valider',
+          handler: () => {
+
+            // loading.present();
+
+            this.depotService.annulerDepot().subscribe(data => {
+                this.successDepot(data, 'Opération reussie!');
+              //  loading.dismiss();
+              }, error => {
+                this.successDepot(error.error, 'Opération non reussie');
+               // loading.dismiss();
+              });
+
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  rowselect(id: number) {
+
+  }
 }

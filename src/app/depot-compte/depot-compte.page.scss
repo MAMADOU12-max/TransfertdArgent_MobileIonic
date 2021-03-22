@@ -18,6 +18,15 @@ ion-content {
     display: none;
   }
 }
+.header-row{
+  font-weight: 500;
+  border-bottom: 2px solid black;
+}
+.data-row{
+  border-bottom: 1px solid black;
+  margin: 12px 0;
+}
+
 // ---------------------------------------------- Code de transaction ------------------------------------------------- //
 #labelCode{
   font-size: 1.4em;

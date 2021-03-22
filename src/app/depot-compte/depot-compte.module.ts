@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { DepotComptePageRoutingModule } from './depot-compte-routing.module';
 
 import { DepotComptePage } from './depot-compte.page';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { DepotComptePage } from './depot-compte.page';
         FormsModule,
         IonicModule,
         DepotComptePageRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxPaginationModule
     ],
   declarations: [DepotComptePage]
 })
