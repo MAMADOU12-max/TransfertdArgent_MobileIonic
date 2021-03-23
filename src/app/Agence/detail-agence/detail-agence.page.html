@@ -1,0 +1,113 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title>Agence</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismissModal()">Close</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12">
+         <ion-card>
+            <img src="assets/images/agence.png" class="avatar"  />
+            <ion-card-header>
+               <ion-card-subtitle>Information de l'Agence</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+
+            <span class="key">Nom de l'agence</span>
+            <ion-item class="ion-margin-bottom">
+              <span class="dataClient" slot="end">{{agenceselected?.nomAgence}}</span>
+            </ion-item>
+
+            <span class="key">Adresse</span>
+            <ion-item class="ion-margin-bottom">
+              <span class="dataClient" slot="end">{{agenceselected?.adressAgence}}</span>
+            </ion-item>
+
+          </ion-card-content>
+        </ion-card>
+
+
+        <ion-card>
+          <img src="assets/images/depotmoney.png" class="avatar" />
+
+          <ion-card-header>
+             <ion-card-subtitle>Information du Compte</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+
+            <span class="key">Identifiant du compte</span>
+            <ion-item class="ion-margin-bottom">
+              <span class="dataClient" slot="end">{{agenceselected?.compte?.identifiantCompte}}</span>
+            </ion-item>
+
+            <span class="key">Solde</span>
+            <ion-item class="ion-margin-bottom">
+              <span class="dataClient" slot="end">{{agenceselected?.compte?.solde}}</span>
+            </ion-item>
+
+            <span class="key">Dernière mise à jour</span>
+            <ion-item class="ion-margin-bottom">
+              <span class="dataClient" slot="end">{{agenceselected?.compte?.miseajour}}</span>
+            </ion-item>
+
+          </ion-card-content>
+        </ion-card>
+
+        <!--        Utilisateurs    -->
+
+        <ion-card>
+            <img src="assets/images/coworkers.png" class="users" />
+
+            <ion-card-header>
+                <ion-card-subtitle>Utilisateurs</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content *ngFor="let user of agenceselected?.users">
+
+                <ion-row class="ion-justify-content-center ion-padding-top ion-padding-bottom">
+                     <div *ngIf="user.avatar !== null" (click)="goTothisUser(user.id)" tappable>
+                         <ion-avatar style="display: flex; justify-content: center">
+                            <img src="data:image/jpg;base64,{{user?.avatar}}" class="avatar">
+                         </ion-avatar>
+                     </div>
+                     <div *ngIf="user.avatar == null" (click)="goTothisUser(user.id)" tappable>
+                        <ion-avatar style="display: flex; justify-content: center">
+                            <img src="assets/images/avatar.png" class="avatar">
+                        </ion-avatar>
+                     </div>
+                </ion-row>
+
+                <ion-row class="ion-padding-bottom"></ion-row>
+
+                <span class="key" (click)="goTothisUser(user.id)" tappable>Username</span>
+                <ion-item class="ion-margin-bottom" (click)="goTothisUser(user.id)" tappable>
+                    <span class="dataClient" slot="end">{{user?.username}}</span>
+                </ion-item>
+
+                <span class="key" (click)="goTothisUser(user.id)" tappable>Rôle</span>
+                <ion-item class="ion-margin-bottom" (click)="goTothisUser(user.id)" tappable>
+                    <span class="dataClient" slot="end">{{user?.type}}</span>
+                </ion-item>
+
+
+            </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
+        <ion-col size="6">
+            <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="secondary" shape="round" title="modifier cette agence" (click)="updateAgence(agenceselected?.id)">Modifier</ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="danger" shape="round" title="supprimer cette agence" (click)="deleteAgence(agenceselected?.id)">Supprimer</ion-button>
+        </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
