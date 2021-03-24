@@ -3,6 +3,7 @@ import {AgenceService} from '../../../services/agence.service';
 import {LoadingController, ModalController} from '@ionic/angular';
 import {DetailAgencePage} from '../detail-agence/detail-agence.page';
 import {AddAgencePage} from '../add-agence/add-agence.page';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-agence',
@@ -23,17 +24,29 @@ export class AgencePage implements OnInit {
     oneAgence: any;
 
     // tslint:disable-next-line:max-line-length
-    constructor(private agenceService: AgenceService, private modalController: ModalController, private loadingController: LoadingController) { }
+    constructor(private agenceService: AgenceService, private modalController: ModalController, private loadingController: LoadingController,
+                private router: Router) { }
 
     ngOnInit() {
-       this.listAgene();
+      this.agenceService.refresNeeded$.subscribe(() => {
+        this.listAgene();
+      });
+      this.listAgene();
     }
 
-    listAgene() {
-       this.agenceService.allAgences().subscribe(data => {
-         // console.log(data);
-         this.allAgences = data;
-       });
+    async listAgene() {
+        const loading = await this.loadingController.create({
+          cssClass: 'my-custom-class',
+          message: 'chargement ...'
+        });
+        await loading.present();
+        this.agenceService.allAgences().subscribe(data => {
+           // console.log(data);
+           this.allAgences = data;
+           loading.dismiss();
+        }, error => {
+          loading.dismiss();
+        });
     }
 
     sortBy(key) {
@@ -99,11 +112,7 @@ export class AgencePage implements OnInit {
     searchActve() { this.recherch = !this.recherch; }
 
     async newAgence() {
-        const modal = await this.modalController.create({
-          component: AddAgencePage,
-          cssClass: 'my-custom-class'
-        });
-        return await modal.present();
+        this.router.navigate(['/tabs/add-agence']);
     }
 
     ToSearch() {

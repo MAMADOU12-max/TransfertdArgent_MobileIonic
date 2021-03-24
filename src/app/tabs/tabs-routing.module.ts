@@ -74,6 +74,22 @@ const routes: Routes = [
       {
         path: 'list-user',
         loadChildren: () => import('../list-user/list-user.module').then( m => m.ListUserPageModule)
+      },
+      {
+        path: 'agence',
+        loadChildren: () => import('../Agence/agence/agence.module').then( m => m.AgencePageModule)
+      },
+      {
+        path: 'edit-agence',
+        loadChildren: () => import('../Agence/edit-agence/edit-agence.module').then( m => m.EditAgencePageModule)
+      },
+      {
+        path: 'add-agence',
+        loadChildren: () => import('../Agence/add-agence/add-agence.module').then( m => m.AddAgencePageModule)
+      },
+      {
+        path: 'list-comptes',
+        loadChildren: () => import('../Compte/list-comptes/list-comptes.module').then( m => m.ListComptesPageModule)
       }
     ]
   },

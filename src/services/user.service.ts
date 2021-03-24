@@ -25,6 +25,9 @@ export class UserService {
     getAllUsersArchived() {
        return this.httpClient.get(this.urlEnv + '/admin/users?archivage=1');
     }
+    getNoWorkUsers() {
+       return this.httpClient.get(this.urlEnv + '/admin/users?working=0');
+    }
     // getAllAdminSystem() {
     //    return this.httpClient.get(this.urlEnv + '/admin/users?type=adminsystem');
     // }

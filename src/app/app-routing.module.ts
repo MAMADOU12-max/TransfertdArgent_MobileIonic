@@ -1,4 +1,6 @@
+// @ts-ignore
 import { NgModule } from '@angular/core';
+// @ts-ignore
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
@@ -13,10 +15,6 @@ const routes: Routes = [
   {
     path: 'header',
     loadChildren: () => import('./header/header.module').then( m => m.HeaderPageModule)
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'calculator',
@@ -82,6 +80,26 @@ const routes: Routes = [
   {
     path: 'detail-transaction',
     loadChildren: () => import('./IonicModal/detail-transaction/detail-transaction.module').then( m => m.DetailTransactionPageModule)
+  },
+  {
+    path: 'agence',
+    loadChildren: () => import('./Agence/agence/agence.module').then( m => m.AgencePageModule)
+  },
+  {
+    path: 'detail-agence',
+    loadChildren: () => import('./Agence/detail-agence/detail-agence.module').then( m => m.DetailAgencePageModule)
+  },
+  {
+    path: 'edit-agence',
+    loadChildren: () => import('./Agence/edit-agence/edit-agence.module').then( m => m.EditAgencePageModule)
+  },
+  {
+    path: 'add-agence',
+    loadChildren: () => import('./Agence/add-agence/add-agence.module').then( m => m.AddAgencePageModule)
+  },
+  {
+    path: 'list-comptes',
+    loadChildren: () => import('./Compte/list-comptes/list-comptes.module').then( m => m.ListComptesPageModule)
   }
 ];
 @NgModule({

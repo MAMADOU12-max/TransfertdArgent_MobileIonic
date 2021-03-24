@@ -1,4 +1,7 @@
 // ------------------------------------------- Header -------------------------------------------//
+ion-header {
+  background-color: white;
+}
 ion-content {
   background-color: white;
   --offset-bottom: auto!important;
@@ -7,6 +10,11 @@ ion-content {
   &::-webkit-scrollbar {
     display: none;
   }
+}
+.avatar{
+  height: 36px;
+  width: 36px;
+  border-radius: 50%;
 }
 // ----------------------------------------------- ion card --------------------------------------//
 .solde{

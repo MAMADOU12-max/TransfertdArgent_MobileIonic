@@ -6,7 +6,7 @@
           <ion-card-header>
             <ion-grid>
               <ion-row class="ion-justify-content-center">
-                <ion-col size-sm="3" offset-sm="1" size="5" offset-lg="1">
+                <ion-col size-lg="1" size-md="1" size-sm="3" size="5">
                   <div>
                     <img src="../../../assets/icon/logo.png"/>
                   </div>
@@ -17,9 +17,10 @@
           <ion-card-content class="ion-align-items-center">
             <ion-grid>
               <ion-row class="ion-justify-content-center">
-                <ion-col size-sm="2" size="4" size-md="1">
+                <ion-col style="display: flex; justify-content: center" size="12">
                   <div class="aboveDepot">
-                    <ion-icon id="depotIcon" name="cube-outline" alt="depot" ></ion-icon>Dépôt
+                    <ion-icon id="depotIcon" name="cube-outline" alt="depot"></ion-icon>
+                    <span class="toute">Dépôt</span>
                   </div>
                 </ion-col>
               </ion-row>
@@ -28,21 +29,24 @@
         </ion-card>
       </ion-toolbar>
       <ion-toolbar >
-        <!--       -->
+          <!--       -->
           <ion-col id="choice" size="12">
-              <ion-segment (ionChange)="segmentChanged($event)">
-                  <ion-segment-button value="liste">
-                       <ion-label>Liste</ion-label>
-                  </ion-segment-button>
-                  <ion-segment-button value="nouveau">
-                        <ion-label>Nouveau</ion-label>
-                  </ion-segment-button>
-              </ion-segment>
+            <ion-segment (ionChange)="segmentChanged($event)">
+              <ion-segment-button value="liste">
+                <ion-label>Liste</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="nouveau">
+                <ion-label>Nouveau</ion-label>
+              </ion-segment-button>
+            </ion-segment>
           </ion-col>
       </ion-toolbar>
     </ion-col>
   </ion-row>
 </ion-header>
+
+
+
 
 <ion-content>
     <ion-grid *ngIf="activeListe">

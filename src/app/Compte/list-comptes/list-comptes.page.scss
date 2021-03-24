@@ -1,0 +1,28 @@
+ion-card-header{
+  padding: 0;
+}
+ion-card-content{
+  padding: 0;
+}
+.aboveDepot{
+  border-bottom: rgb(133, 191, 224) solid 4px;
+  font-size: 1.1em;
+}
+ion-content {
+  background-color: white;
+  --offset-bottom: auto!important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.header-row{
+  font-weight: 500;
+  border-bottom: 2px solid black;
+}
+.data-row{
+  border-bottom: 1px solid black;
+  margin: 12px 0;
+  font-size: 0.8em;
+}

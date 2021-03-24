@@ -23,6 +23,7 @@ export class HomepagePage implements OnInit {
     idAgence: number;
     compte: any;
     photoExist = false;
+    tokenDecoded: any;
 
     constructor(public alertController: AlertController, private router: Router, private authService: AuthService
               , private userService: UserService, private compteService: CompteService, private depotService: DepotService) {}
@@ -35,20 +36,20 @@ export class HomepagePage implements OnInit {
 
     meanmethod() {
       const token =  localStorage.getItem('token') ;
-      const tokenDecoded = this.helper.decodeToken(token) ;
+      this.tokenDecoded = this.helper.decodeToken(token) ;
       // console.log(tokenDecoded?.id);
-      if (tokenDecoded.roles[0] === 'ROLE_USERAGENCE') {
+      if (this.tokenDecoded.roles[0] === 'ROLE_USERAGENCE') {
         this.useragence = true;
-      } else if (tokenDecoded.roles[0] === 'ROLE_ADMINSYSTEM') {
+      } else if (this.tokenDecoded.roles[0] === 'ROLE_ADMINSYSTEM') {
         this.adminSystem = true;
-      } else if (tokenDecoded.roles[0] === 'ROLE_ADMINAGENCE') {
+      } else if (this.tokenDecoded.roles[0] === 'ROLE_ADMINAGENCE') {
         this.adminagence = true;
-      } else if (tokenDecoded.roles[0] === 'ROLE_CAISSIER') {
+      } else if (this.tokenDecoded.roles[0] === 'ROLE_CAISSIER') {
         this.caissier = true;
       }
 
       // console.log(tokenDecoded.id);
-      this.userService.getUserById(tokenDecoded.id).subscribe(data => {
+      this.userService.getUserById(this.tokenDecoded.id).subscribe(data => {
         //  avatar user;
         this.dataUser = data;
         if (this.dataUser.avatar != null) {

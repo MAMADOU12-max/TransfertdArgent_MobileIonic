@@ -34,10 +34,10 @@ export class DetailTransactionPage implements OnInit {
       this.modalCtrl.dismiss();
   }
 
-  async GoodTransaction(messageTransaction: any) {
+  async GoodTransaction(messageTransaction: any, appreciation: any) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Reussie',
+      header: appreciation,
       message: messageTransaction,
       buttons: ['OK']
     });
@@ -64,10 +64,10 @@ export class DetailTransactionPage implements OnInit {
           handler: () => {
             // console.log(this.transactionData.codeTransaction);
             this.transactionService.annulerTransaction(this.transactionData.codeTransaction).subscribe(data => {
-              this.GoodTransaction(data);
+              this.GoodTransaction(data, 'Reussie');
               this.router.navigate(['/homepage']);
             }, error => {
-              this.GoodTransaction(error.error);
+              this.GoodTransaction(error.error, 'Erreur');
             });
           }
         }

@@ -51,7 +51,7 @@ export class AddUserPage implements OnInit {
           firstname: ['', [Validators.required, Validators.minLength(3)]],
           lastname: ['', [Validators.required, Validators.minLength(2)]],
           password: ['', [Validators.required, Validators.minLength(5)]],
-          profil: [''],
+          profil: ['', [Validators.required]],
           username: ['', [Validators.required, Validators.minLength(4)]],
           phone: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
           identityNum: ['', [Validators.required, Validators.minLength(9)]],

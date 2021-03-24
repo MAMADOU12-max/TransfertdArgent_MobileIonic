@@ -3,6 +3,7 @@ import {AlertController, ModalController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {TransactionService} from '../../../services/transaction.service';
 import {element} from 'protractor';
+import {AgenceService} from '../../../services/agence.service';
 
 @Component({
   selector: 'app-detail-agence',
@@ -20,7 +21,7 @@ export class DetailAgencePage implements OnInit {
   data: any;
 
   constructor(private modalCtrl: ModalController, private router: Router, private alertController: AlertController,
-              private transactionService: TransactionService) { }
+              private transactionService: TransactionService, private agenceService: AgenceService) { }
 
   ngOnInit() {
     // console.log(this.agenceselected);
@@ -58,8 +59,46 @@ export class DetailAgencePage implements OnInit {
     this.router.navigate(['detail-user/' + id]);
   }
 
-  deleteAgence(id) {
-    console.log(id);
+  async alertAgence(messageTransaction: any, appreciation: any) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: appreciation,
+      message: messageTransaction,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async deleteAgence(id) {
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Confirmation',
+      message: 'Etes vous sûr de vouloir supprimer cette agence?' ,
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Confirmer',
+          handler: () => {
+            // console.log(this.transactionData.codeTransaction);
+            this.agenceService.deleteAgence(id).subscribe(data => {
+                this.alertAgence('Agence supprimé!', 'Reussie');
+                this.modalCtrl.dismiss();
+            }, error => {
+               this.alertAgence('Problème lors de la suppréssion de l\'agence', 'Erreur');
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   updateAgence(id: number) {
