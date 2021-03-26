@@ -2,19 +2,31 @@
     <ion-tabs>
         <ion-tab-bar slot="bottom">
 
-            <ion-tab-button (click)="home()">
+            <ion-tab-button tab="homepage">
                 <ion-icon src="assets/icon/home.svg"></ion-icon>
             </ion-tab-button>
 
-            <ion-tab-button tab="historique">
+            <ion-tab-button tab="mes-transactions" *ngIf="useragence">
                 <ion-icon name="refresh"></ion-icon>
             </ion-tab-button>
 
-            <ion-tab-button tab="tab3">
+            <ion-tab-button tab="toutesles-transactions" *ngIf="caissier || adminagence">
+                <ion-icon  src="assets/icon/all-transaction.svg"></ion-icon>
+            </ion-tab-button>
+
+            <ion-tab-button tab="mes-commissions" *ngIf="adminSystem || adminagence">
                 <ion-icon name="barcode"></ion-icon>
             </ion-tab-button>
 
-            <ion-tab-button tab="calculator">
+            <ion-tab-button *ngIf="adminSystem || adminagence" tab="list-tarifs">
+                <ion-icon  name="wallet-outline"></ion-icon>
+            </ion-tab-button>
+
+            <ion-tab-button *ngIf="adminSystem" tab="settings">
+              <ion-icon name="settings-outline"></ion-icon>
+            </ion-tab-button>
+
+            <ion-tab-button tab="calculator" *ngIf="useragence || caissier || adminagence">
                 <ion-icon src="assets/icon/calculator.svg"></ion-icon>
             </ion-tab-button>
 

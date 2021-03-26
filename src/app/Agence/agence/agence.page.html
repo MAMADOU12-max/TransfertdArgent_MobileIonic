@@ -59,8 +59,8 @@
                     </ion-col>
                     <ion-col size="5" (click)="sortBy('adressAgence')" tappable>
                         <div>Adresse
-                              <ion-icon name="arrow-down" *ngIf="sortAddress"></ion-icon>
-                              <ion-icon name="arrow-up" *ngIf="!sortAddress"></ion-icon>
+<!--                              <ion-icon name="arrow-down" *ngIf="sortAddress"></ion-icon>-->
+<!--                              <ion-icon name="arrow-up" *ngIf="!sortAddress"></ion-icon>-->
                         </div>
                     </ion-col>
                     <ion-col  size="3" tappable (click)="searchActve()">
@@ -84,12 +84,14 @@
 
             </ion-col>
         </ion-row>
-        <ion-row class="ion-justify-content-center">
-            <div>
-                <pagination-controls (pageChange)="page = $event"></pagination-controls>
-            </div>
-        </ion-row>
 
+      <ion-row class="ion-justify-content-center">
+        <ion-col size="12">
+          <div>
+            <pagination-controls (pageChange)="page = $event"></pagination-controls>
+          </div>
+        </ion-col>
+      </ion-row>
     </ion-grid>
 </ion-content>
 

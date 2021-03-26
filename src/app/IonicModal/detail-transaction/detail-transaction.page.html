@@ -172,10 +172,10 @@
                       <!--                            <ion-button color="danger" class="ion-margin-bottom" expand="block" >Modifier la transaction</ion-button>-->
                       <!--                        </ion-col>-->
                       <ion-col class="ion-margin-bottom" size="12" *ngIf="etat == 'Encours'">
-                        <ion-button color="danger" class="ion-margin-bottom" expand="block" (click)="annulerTransaction()">Annuler la transaction</ion-button>
+                          <ion-button color="danger" class="ion-margin-bottom" expand="block" (click)="annulerTransaction()">Annuler la transaction</ion-button>
                       </ion-col>
                       <ion-col class="ion-margin-bottom" size="12" *ngIf="etat !== 'Encours'">
-                        <ion-button routerLink="/homepage" color="secondary" class="ion-margin-bottom" expand="block">Page d'acceuil</ion-button>
+                          <ion-button routerLink="/homepage" color="secondary" class="ion-margin-bottom" expand="block" (click)="returnAcceuil()">Page d'acceuil</ion-button>
                       </ion-col>
                     </ion-row>
 

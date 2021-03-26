@@ -14,16 +14,13 @@ import {AlertController} from '@ionic/angular';
 export class AddAgencePage implements OnInit {
 
   allAgences: any;
-  allProfis: any;
   formAgence: FormGroup | any;
   submitted = false;
-  errorSubmitted = false;
-  selectedFile: any ;
-  url: any;
-  msg = '';
+  errorMessage: string | undefined;
   nomAgence: string | undefined;
   adressAgence: string | undefined;
-  solde: string | undefined;
+  solde: number | undefined;
+  identifiantCompte: number;
   profil = '' ;
   agence: number;
   availableUsers: any;
@@ -34,12 +31,13 @@ export class AddAgencePage implements OnInit {
   ngOnInit() {
     this.userService.getNoWorkUsers().subscribe(agences => {
       this.availableUsers = agences ;
+      // console.log(this.availableUsers);
     });
 
     this.formAgence = this.formBuilder.group({
         nomAgence: ['', [Validators.required, Validators.minLength(3)]],
         adressAgence: ['', [Validators.required, Validators.minLength(2)]],
-        solde: ['', [Validators.required, Validators.minLength(5)]],
+        solde: ['', [Validators.required, Validators.min(700000)]],
         identifiantCompte: ['', [Validators.required]],
         users: ['', [Validators.required, Validators.minLength(4)]]
     }) ;
@@ -61,30 +59,31 @@ export class AddAgencePage implements OnInit {
     await alert.present();
   }
 
+    entierAleatoire(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+// Utilisation
+// La variable contient un nombre aléatoire compris entre 1 et 10
+//   var entier = entierAleatoire(1, 10);
 
-  async CreateGence() {
-    console.log(this.formAgence.value);
-    // const formValue = this.formUser.value ;
-    // const formData = new FormData();
-    // for (const key of Object.keys(formValue)) {
-    //   if (key !== 'photo') {
-    //     const value =  formValue[key] ;
-    //     // console.log(value);
-    //     formData.append(key, value) ;
-    //   }
-    //   // console.log(formData) ;
-    // }
-    // if (this.selectedFile) {
-    //   formData.append('photo',  this.selectedFile) ;
-    // }
-    // // console.log(this.formUser.value); return;
-    // this.userService.addnewUser(formData).subscribe(data => {
-    //   this.router.navigate(['homepage']);
-    //   this.GoodTransaction('L\'utilisateur a été ajouté avec succés!');
-    //   this.formUser.reset();
-    //   this.otherForm.reset();
-    // }, error => {
-    //   console.log(error);
-    // });
+  async CreateAgence() {
+     this.submitted = true;
+     this.formAgence.value.identifiantCompte = this.entierAleatoire(1000, 100000);
+     console.log(this.formAgence.value);
+
+     const compte = {
+        solde: this.formAgence.value.solde,
+         identifiantCompte: this.formAgence.value.identifiantCompte
+     };
+    // tslint:disable-next-line:max-line-length
+     this.agenceService.addAgence(this.formAgence.value.nomAgence, this.formAgence.value.adressAgence, compte, this.formAgence.value.users).subscribe(
+       data => {
+         this.GoodTransaction('Vous venez d\'ajouter une nouvélle agence.');
+         this.formAgence.reset();
+         this.router.navigate(['/tabs/agence']);
+       }, error => {
+           this.errorMessage = error.error;
+           return;
+       });
   }
 }

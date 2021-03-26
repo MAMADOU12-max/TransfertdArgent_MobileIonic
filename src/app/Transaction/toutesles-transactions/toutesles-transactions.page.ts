@@ -181,5 +181,4 @@ export class TouteslesTransactionsPage implements OnInit {
         });
     }
 
-
 }

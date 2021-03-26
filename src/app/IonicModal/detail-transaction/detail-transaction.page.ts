@@ -21,16 +21,16 @@ export class DetailTransactionPage implements OnInit {
               private transactionService: TransactionService) { }
 
   ngOnInit() {
-    console.log(this.datapassed);
+    // console.log(this.datapassed);
     this.transactionData = this.datapassed[0];
-    console.log(this.transactionData.etat);
+    // console.log(this.transactionData.etat);
     this.etat = this.transactionData.etat;
     this.emetteurData = this.datapassed[1];
     this.beneficiaireData = this.datapassed[2];
   }
 
   dismissModal() {
-      console.log('click');
+     // console.log('click');
       this.modalCtrl.dismiss();
   }
 
@@ -57,7 +57,7 @@ export class DetailTransactionPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            // console.log('Confirm Cancel');
           }
         }, {
           text: 'Valider',
@@ -65,7 +65,7 @@ export class DetailTransactionPage implements OnInit {
             // console.log(this.transactionData.codeTransaction);
             this.transactionService.annulerTransaction(this.transactionData.codeTransaction).subscribe(data => {
               this.GoodTransaction(data, 'Reussie');
-              this.router.navigate(['/homepage']);
+              this.router.navigate(['/tabs/homepage']);
             }, error => {
               this.GoodTransaction(error.error, 'Erreur');
             });
@@ -74,5 +74,10 @@ export class DetailTransactionPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  returnAcceuil() {
+      this.modalCtrl.dismiss();
+      this.router.navigate(['/tabs/homepage']);
   }
 }

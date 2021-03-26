@@ -1,0 +1,14 @@
+ion-content {
+  background-color: white;
+  --offset-bottom: auto!important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+.error{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}

@@ -51,11 +51,13 @@ export class LoginPage implements OnInit {
                   this.roleuser = tokenDecoded.roles ;
                   console.log(this.roleuser[0]);
                   if (this.roleuser[0] === 'ROLE_CAISSIER') {
-                       this.router.navigateByUrl('/homepage');
+                       this.router.navigateByUrl('/tabs/homepage');
                   } else if (this.roleuser[0] === 'ROLE_ADMINSYSTEM') {
-                       this.router.navigateByUrl('/homepage');
+                       this.router.navigateByUrl('/tabs/homepage');
                   } else if (this.roleuser[0] === 'ROLE_USERAGENCE') {
-                       this.router.navigateByUrl('/homepage');
+                       this.router.navigateByUrl('/tabs/homepage');
+                  } else if (this.roleuser[0] === 'ROLE_ADMINAGENCE') {
+                     this.router.navigateByUrl('/tabs/homepage');
                   }
              }, error => {
               this.errorData = true;

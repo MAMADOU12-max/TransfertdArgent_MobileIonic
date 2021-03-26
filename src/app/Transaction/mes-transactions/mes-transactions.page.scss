@@ -1,14 +1,15 @@
-// ----------------------------------------- HEADER --------------------------------------------- //
-//ion-card-header{
-//  padding: 0;
-//}
-// -------------------------------------------- ## ------------------------------------------------- //
+ion-content {
+  background-color: white;
+  --offset-bottom: auto!important;
+  --overflow: hidden;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
 ion-card-content{
-//  padding: 25px 70px;
-//  padding-bottom: 0;
   padding: 0;
-//  scroll-padding-right: 1px;
 }
 .aboveDepot{
   border-bottom: rgb(133, 191, 224) solid 4px;

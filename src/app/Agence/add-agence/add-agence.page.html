@@ -26,46 +26,45 @@
 
             <ion-card-content>
 
-              <ion-item lines="full" class=" ion-margin-bottom">
-                <ion-label position="floating">Nom de l'Agence</ion-label>
-                <ion-input type="text" required formControlName="nomAgence"></ion-input>
-              </ion-item>
-<!--              <ion-label color="danger" class="error" *ngIf="submitted || Validations.lastname.errors && Validations.lastname.touched">-->
-<!--                <ion-label  *ngIf="Validations.lastname.errors.required">Ce champ est obligatoire</ion-label>-->
-<!--                <ion-label  *ngIf="Validations.lastname.errors.minlength">Le nom est trop court, ça doit comporter au minimum 2 caractères!</ion-label>-->
-<!--              </ion-label>-->
+                <ion-item lines="full" class=" ion-margin-bottom">
+                    <ion-label position="floating">Nom de l'Agence</ion-label>
+                    <ion-input type="text" required formControlName="nomAgence"></ion-input>
+                </ion-item>
+                <ion-label color="danger" class="error" *ngIf="submitted || Validations.nomAgence.errors && Validations.nomAgence.touched">
+                    <ion-label  *ngIf="Validations.nomAgence.errors.required">Ce champ est obligatoire</ion-label>
+                    <ion-label  *ngIf="Validations.nomAgence.errors.minlength">Le nom de l'adrèsse est trop court, ça doit comporter au minimum 2 caractères!</ion-label>
+                </ion-label>
 
-              <ion-item lines="full" class="ion-margin-bottom">
-                <ion-label position="floating">Adrésse</ion-label>
-                <ion-input type="text" required formControlName="adressAgence"></ion-input>
-              </ion-item>
-<!--              <ion-label color="danger" class="error" *ngIf="submitted || Validations.firstname.errors && Validations.firstname.touched">-->
-<!--                <ion-label *ngIf="Validations.firstname.errors.required">Ce champ est obligatoire</ion-label>-->
-<!--                <ion-label *ngIf="Validations.firstname.errors.minlength">Le prènom est trop court, ça doit comporter au minimum 2 caractères!</ion-label>-->
-<!--              </ion-label>-->
-              <!--                            <ion-label color="danger" class="ion-justify-content-center error" *ngIf="nomEmetteur.hasError('required') && nomEmetteur.touched">Veuillez bien saisir le nom de l'émetteur!</ion-label>-->
+                <ion-item lines="full" class="ion-margin-bottom">
+                  <ion-label position="floating">Adrèsse</ion-label>
+                  <ion-input type="text" required formControlName="adressAgence"></ion-input>
+                </ion-item>
+                <ion-label color="danger" class="error" *ngIf="submitted || Validations.adressAgence.errors && Validations.adressAgence.touched">
+                    <ion-label *ngIf="Validations.adressAgence.errors.required">Ce champ est obligatoire</ion-label>
+                    <ion-label *ngIf="Validations.adressAgence.errors.minlength">L'adrèsse de l'agence  est trop court, ça doit comporter au minimum 2 caractères!</ion-label>
+                </ion-label>
 
-              <ion-item lines="full" class=" ion-margin-bottom">
-                  <ion-label position="floating">Solde du compte</ion-label>
-                  <ion-input type="text" required formControlName="solde"></ion-input>
-              </ion-item>
+                <ion-item lines="full" class=" ion-margin-bottom">
+                    <ion-label position="floating">Solde du compte</ion-label>
+                    <ion-input type="number" min="800000" required formControlName="solde"></ion-input>
+                </ion-item>
+                <ion-label color="danger" class="error" *ngIf="submitted || Validations.solde.errors && Validations.solde.touched">
+                    <ion-label *ngIf="Validations.solde.errors.required">Ce champ est obligatoire</ion-label>
+                    <ion-label *ngIf="Validations.solde.errors.min">Le solde doit être supérieur à 700 000 Fcfa</ion-label>
+                </ion-label>
 
-              <ion-item>
-                  <ion-label>Utiisateurs</ion-label>
-                  <ion-select class="custom-options" multiple="true" *ngFor="let user of availableUsers">
-                      <ion-select-option value="brown">{{user.username}}</ion-select-option>
-                  </ion-select>
-              </ion-item>
+                <ion-item >
+                    <ion-label>Utiisateurs</ion-label>
+                    <ion-select class="custom-options" multiple="true" formControlName="users">
+                        <ion-select-option  *ngFor="let user of availableUsers" value="/api/admin/user/{{user.id}}">{{user.username}}</ion-select-option>
+                    </ion-select>
+                </ion-item>
 
-
-              <!--                            <ion-label  color="danger" *ngIf="phoneEmetteur.hasError('required') && phoneEmetteur.touched" class="ion-justify-content-center error">Veuillez saisir le numéro de l'émetteur!</ion-label>-->
-
-              <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
-                <ion-col class="ion-margin-bottom">
-                  <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="secondary" shape="round" (click)="CreateUser()">Valider</ion-button>
-                  <!--                                <input type="hidden"  class="ion-justify-content-end ion-margin-top ion-margin-bottom">-->
-                </ion-col>
-              </ion-row>
+                <ion-row class="ion-justify-content-end ion-margin-top ion-margin-bottom">
+                    <ion-col class="ion-margin-bottom">
+                        <ion-button expand="block" class="ion-justify-content-end ion-margin-top ion-margin-bottom" color="secondary" shape="round" (click)="CreateAgence()">Valider</ion-button>
+                    </ion-col>
+                </ion-row>
 
             </ion-card-content>
 

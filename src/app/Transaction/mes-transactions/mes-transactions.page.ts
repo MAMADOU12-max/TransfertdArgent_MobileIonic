@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {TransactionService} from '../../../services/transaction.service';
+import {LoadingController, ModalController} from '@ionic/angular';
+import {DetailTransactionPage} from '../../IonicModal/detail-transaction/detail-transaction.page';
 
 @Component({
   selector: 'app-mes-transactions',
@@ -15,29 +17,41 @@ export class MesTransactionsPage implements OnInit {
   sortMontant = false;
   sortKey = null;
   edit = {};
-  page = 1;
   perpage = 0;
   resultsCount = 10;
   totalData = 0;
   totalPages = 0;
   transData: any;
-  constructor(private transactionService: TransactionService) { }
+  // pagination
+  page: number | undefined = 1;
+  totalTransactions: number | undefined;
+  constructor(private transactionService: TransactionService, private loadingController: LoadingController,
+              private modalController: ModalController) { }
 
     ngOnInit() {
         this.getmesTransactins();
     }
-    getmesTransactins() {
-          this.transactionService.mesTransactions().subscribe(data => {
-            this.mestransactions = data;
-            // console.log(this.mestransactions);
-
-            // this.perpage = this.mestransactions.perpage;
-            // console.log(this.perpage);
-            // this.totalData = this.mestransactions.total;
-            // this.totalPages = this.mestransactions.totalPages;
-            // console.log(this.transData);
-            // this.sort(valueA);
+    async getmesTransactins() {
+        const loading = await this.loadingController.create({
+          cssClass: 'my-custom-class',
+          message: 'chargement ...'
         });
+        await loading.present();
+        this.transactionService.mesTransactions().subscribe(data => {
+          this.mestransactions = data;
+          this.totalTransactions = this.mestransactions.length;
+          loading.dismiss();
+          // console.log(this.mestransactions);
+
+          // this.perpage = this.mestransactions.perpage;
+          // console.log(this.perpage);
+          // this.totalData = this.mestransactions.total;
+          // this.totalPages = this.mestransactions.totalPages;
+          // console.log(this.transData);
+          // this.sort(valueA);
+      }, error => {
+          loading.dismiss();
+      });
     }
 
     sortBy(key) {
@@ -106,8 +120,32 @@ export class MesTransactionsPage implements OnInit {
         }, 500);
     }
 
-  // toggleInfiniteScroll() {
-  //   this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
-  // }
+    async presentModal(data: any) {
+      const modal = await this.modalController.create({
+        component: DetailTransactionPage,
+        cssClass: 'my-custom-class',
+        componentProps: {
+          datapassed: data,
+        }
+      });
+      return await modal.present();
+    }
+
+    async rowselect(code: number) {
+      const loading = await this.loadingController.create({
+        cssClass: 'my-custom-class',
+        message: 'chargement ...'
+      });
+      await loading.present();
+      this.transactionService.getNocontroltransaction(code).subscribe( data => {
+        const transaction = data;
+        this.presentModal(transaction);
+        loading.dismiss();
+        // console.log(data);
+      }, error => {
+        console.log(error);
+        loading.dismiss();
+      });
+    }
 
 }

@@ -1,6 +1,4 @@
-// @ts-ignore
 import { NgModule } from '@angular/core';
-// @ts-ignore
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
@@ -25,10 +23,6 @@ const routes: Routes = [
     loadChildren: () => import('./Transaction/depot/depot.module').then(m => m.DepotPageModule)
   },
   {
-    path: 'historique',
-    loadChildren: () => import('./historique/historique.module').then( m => m.HistoriquePageModule)
-  },
-  {
     path: 'retrait',
     loadChildren: () => import('./Transaction/retrait/retrait.module').then(m => m.RetraitPageModule)
   },
@@ -38,7 +32,6 @@ const routes: Routes = [
   },
   {
     path: 'toutesles-transactions',
-    // tslint:disable-next-line:max-line-length
     loadChildren: () => import('./Transaction/toutesles-transactions/toutesles-transactions.module').then(m => m.TouteslesTransactionsPageModule)
   },
   {
@@ -100,6 +93,14 @@ const routes: Routes = [
   {
     path: 'list-comptes',
     loadChildren: () => import('./Compte/list-comptes/list-comptes.module').then( m => m.ListComptesPageModule)
+  },
+  {
+    path: 'list-tarifs',
+    loadChildren: () => import('./Tarifs/list-tarifs/list-tarifs.module').then( m => m.ListTarifsPageModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   }
 ];
 @NgModule({

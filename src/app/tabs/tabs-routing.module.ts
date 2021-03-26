@@ -13,21 +13,9 @@ const routes: Routes = [
       //   path: '',
       //   loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
       // },
-      // {
-      //   path: 'home',
-      //   loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
-      // },
       {
-        path: 'historique',
-        loadChildren: () => import('../historique/historique.module').then(m => m.HistoriquePageModule)
-      },
-      {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-      },
-      {
-        path: 'tab3',
-        loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+        path: 'homepage',
+        loadChildren: () => import('../homepage/homepage.module').then(m => m.HomepagePageModule)
       },
       {
         path: 'calculator',
@@ -47,18 +35,12 @@ const routes: Routes = [
       },
       {
         path: 'toutesles-transactions',
-        // tslint:disable-next-line:max-line-length
         loadChildren: () => import('../Transaction/toutesles-transactions/toutesles-transactions.module').then(m => m.TouteslesTransactionsPageModule)
       },
       {
         path: 'mes-commissions',
         loadChildren: () => import('../mes-commissions/mes-commissions.module').then( m => m.MesCommissionsPageModule)
       },
-      // ,
-      // {
-      //   path: 'touteslestransactions',
-      //   loadChildren: () => import('../touteslestransactions/touteslestransactions.module').then( m => m.TouteslestransactionsPageModule)
-      // },
       {
         path: 'depot-compte',
         loadChildren: () => import('../depot-compte/depot-compte.module').then( m => m.DepotComptePageModule)
@@ -90,6 +72,14 @@ const routes: Routes = [
       {
         path: 'list-comptes',
         loadChildren: () => import('../Compte/list-comptes/list-comptes.module').then( m => m.ListComptesPageModule)
+      },
+      {
+        path: 'list-tarifs',
+        loadChildren: () => import('../Tarifs/list-tarifs/list-tarifs.module').then( m => m.ListTarifsPageModule)
+      },
+      {
+        path: 'settings',
+        loadChildren: () => import('../settings/settings.module').then( m => m.SettingsPageModule)
       }
     ]
   },
