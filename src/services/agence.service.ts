@@ -34,4 +34,12 @@ export class AgenceService {
         })
       );
     }
+
+    addAgence(nomAgence: string, adressAgence: string, compte: any, users: any) {
+      return this.httpClient.post(this.urlEnv + '/agence', {nomAgence, adressAgence, compte, users}).pipe(
+        tap(() => {
+          this.refres$.next() ;
+        })
+      );
+    }
 }
