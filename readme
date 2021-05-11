@@ -1,16 +1,7 @@
 Mise en place 
 
-For run this project, you must have on your computer symfony and composer
+For run this project, you must have on your computer npm and nodejs by doing => sudo apt install npm nodejs
 
-Installing composer on linux: sudo apt install composer
-
-
-
-
-Installing symfony on linux: wget https://get.symfony.com/cli/installer -O - | bash
-
-https://symfony.com/download
-
-1/ If all is ok, we can clone project now :: git clone 
+1/ If all is ok, we can clone project now :: git clone https://github.com/MAMADOU12-max/TransfertdArgent_MobileIonic.git
 
 2/ Install all dependance::  npm install
